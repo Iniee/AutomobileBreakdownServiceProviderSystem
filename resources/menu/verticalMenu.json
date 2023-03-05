@@ -1,0 +1,97 @@
+{
+  "menu": [
+    {
+      "url": "/dashboard",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
+      "slug": "dashboard"
+    },
+    {
+      "menuHeader": "User Pages"
+    },
+    {
+      "name": "Agent",
+      "icon": "menu-icon tf-icons bx bxs-user-detail",
+      "slug": "agent",
+      "submenu": [
+        {
+          "url": "/create/agent",
+          "name": "Register Agent",
+          "slug": "agent-create-agent"
+        },
+        {
+          "url": "/view/agent",
+          "name": "View All Agents",
+          "slug": "agent-view-agent"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Activate Accounts",
+          "slug": "pages-account-settings-notifications"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Deactivate Accounts",
+          "slug": "pages-account-settings-notifications"
+        }
+      ]
+    },
+
+    {
+      "name": "Client",
+      "icon": "menu-icon tf-icons bx bxs-user-detail",
+      "slug": "client",
+      "submenu": [
+        {
+          "url": "/view/client",
+          "name": "View All Client",
+          "slug": "client-view-client"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Deactivate Accounts",
+          "slug": "pages-account-settings-notifications"
+        }
+      ]
+    },
+
+    {
+      "name": "Service Provider",
+      "icon": "menu-icon tf-icons bx bxs-user-detail",
+      "slug": "provider",
+      "submenu": [
+        {
+          "url": "/view/provider",
+          "name": "View All provider",
+          "slug": "provider-view-provider"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Activate Accounts",
+          "slug": "pages-account-settings-notifications"
+        },
+        {
+          "url": "/pages/account-settings-notifications",
+          "name": "Deactivate Accounts",
+          "slug": "pages-account-settings-notifications"
+        }
+      ]
+    },
+     {
+      "menuHeader": "Transactions"
+    },
+    {
+      "name": "Client Transaction",
+      "url": "/client/transaction",
+      "icon": "menu-icon tf-icons bx bx-transfer",
+      "slug": "trans-client-transaction"
+    },
+    {
+      "name": "Service Charges",
+      "url": "/service/charges",
+      "icon": "menu-icon tf-icons bx bx-money",
+      "slug": "trans-service-charges"
+    }
+
+  ]
+}
