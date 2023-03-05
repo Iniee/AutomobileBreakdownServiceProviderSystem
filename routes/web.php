@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\TransactionController;
 
 /*
@@ -38,8 +39,11 @@ Route::group(['middleware'=> ['auth']], function () {
 
         //Agent side bar
         Route::get('/view/agent', [AgentController::class, 'agentAccount'])->name('agent-view-agent');
-        Route::get('/create/agent', [AgentController::class, 'createAgent'])->name('agent-create-agent');
-        Route::get('/deactivate/agent', [AgentController::class, 'agentDeactivateAccount'])->name('agent-deactivate-agent');
+        Route::any('/create/agent', [AgentController::class, 'register'])->name('agent.create');
+        Route::any('/store/user', [AgentController::class, 'store'])->name('agent.store');
+        Route::put('/agent/{agent}/status', [StatusController::class, 'updateStatus'])->name('agent.status');
+        Route::get('/active/agent', [AgentController::class, 'activeAgent'])->name('agent-activate-agent');
+        Route::get('/deactive/agent', [AgentController::class, 'deactiveAgent'])->name('agent-deactivate-agent');
 
         //Client Side bar
         Route::get('/view/client', [ClientController::class, 'clientAccount'])->name('client-view-client');

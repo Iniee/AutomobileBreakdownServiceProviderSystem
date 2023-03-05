@@ -21,8 +21,8 @@
       <div class="d-flex flex-row">
         <div class="col-sm-6">
           <div class="card-body">
-            <h5 class="card-title text-dark">TOTALAGENTS</h5>
-            <b>0</b>
+            <h5 class="card-title text-dark">TOTAL AGENTS</h5>
+            <b>{{ $count = DB::table('agents')->count();  }}</b>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
       <div class="d-flex flex-row">
         <div class="col-sm-6">
           <div class="card-body">
-            <h5 class="card-title text-dark">TOTALSERVICEPROVIDERS</h5>
+            <h5 class="card-title text-dark">TOTAL SERVICEPROVIDERS</h5>
             <b>0</b>
           </div>
         </div>

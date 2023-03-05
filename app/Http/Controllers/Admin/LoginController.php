@@ -31,6 +31,9 @@ class LoginController extends Controller
          return view('content.authentications.forgot-password');
         }
 
+        
+        
+        
         public function logout()
         {
         Session::flush();

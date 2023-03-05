@@ -21,43 +21,63 @@
     <div class="card mb-4">
       <h5 class="card-header">Create Agent Account</h5>
       <!-- Account -->
-      <div class="card-body">
+    <div class="card-body">
+      <form class="mb-3" action="{{ route('agent.store')}}" method="POST">
+       @csrf
         <div class="d-flex align-items-start align-items-sm-center gap-4">
-          <img src="{{asset('assets/img/avatars/1.png')}}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+          <img src="{{asset('assets/img/avatars/1.png')}}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" name = "profile_picture" />
           <div class="button-wrapper">
             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
               <span class="d-none d-sm-block">Upload new photo</span>
               <i class="bx bx-upload d-block d-sm-none"></i>
-              <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
+              <input type="file" id="upload" name = "profile_picture" value="{{ old('profile_picture') }}" class="account-file-input" enctype= "multipart/form-data" hidden accept="image/png, image/jpeg" />
             </label>
-
             <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
           </div>
         </div>
-      </div>
-      <hr class="my-0">
-      <div class="card-body">
-        <form method="POST" onsubmit="return false">
+        <hr class="my-0">
+        <div class="card-body">
+         
           <div class="row">
             <div class="mb-3 col-md-6">
               <label for="name" class="form-label">Name</label>
-              <input class="form-control" type="text" id="name" name="name" value="John" autofocus />
+                    <input class="form-control  @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="John" required autofocus />                     
+                     @error('name')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror
             </div>
             <div class="mb-3 col-md-6">
               <label for="email" class="form-label">E-mail</label>
-              <input class="form-control" type="text" id="email" name="email" placeholder="john.doe@example.com" />
+                     <input class="form-control @error('email') is-invalid @enderror" type="text" id="email" name="email" value="{{ old('email') }}" placeholder="john.doe@example.com" required autofocus />
+                      @error('email')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror            
             </div>
             <div class="mb-3 col-md-6">
               <label for="phoneNumber" class="form-label">Phone Number</label>
-              <input class="form-control" type="text" id="phone_number" name="phone_number" placeholder="08000000012" />
+                     <input class="form-control @error('phone_number') is-invalid @enderror" type="text" max="11" id="phone_number" value="{{ old('phone_number') }}" name="phone_number" placeholder="08000000012" required autofocus />
+                      @error('phone_number')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror  
             </div>
             <div class="mb-3 col-md-6">
               <label for="account_number" class="form-label">Account Number</label>
-              <input class="form-control" type="text" id="account_number" name="account_number" placeholder="8023451256" />
+                     <input class="form-control @error('account_number') is-invalid @enderror" type="text" max="10" id="account_number" name="account_number" value="{{ old('account_number') }}" placeholder="8023451256" />
+                      @error('account_number')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror
             </div>
             <div class="mb-3 col-md-6">
               <label for="bank" class="form-label">Bank</label>
-               <select id="bank_name" class="select2 form-select">
+               <select name="bank_name" id="bank_name" class="select2 form-select">
                 <option value="">Select</option>
                 <option value="AB Microfinance Bank Nigeria Limited">AB Microfinance Bank Nigeria Limited</option>
                 <option value="AB Microfinance Bank Nigeria Limited">AB Microfinance Bank Nigeria Limited</option>
@@ -105,24 +125,43 @@
             </div>
             <div class="mb-3 col-md-6">
               <label for="address" class="form-label">Home Address</label>
-              <input type="text" class="form-control" id="Home_Address" name="home_address" placeholder="Lagos,Nigeria" />
+                    <input type="text" class="form-control @error('home_address') is-invalid @enderror" id="home_address" name="home_address" value="{{ old('home_address') }}"
+                     placeholder="Enter your address" required autofocus/>
+                     @error('home_address')
+                     <span class="invalid-feedback" role="alert">
+                     <strong>{{ $message }}</strong>
+                     </span>
+                     @enderror  
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label" for="gender">Gender</label>
-              <select id="gender" class="select2 form-select">
+              <select id="gender" name="gender" class="select2 form-select">
                 <option value="">Select</option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
               </select>
             </div>
+            <div class="mb-3 col-md-6 form-password-toggle">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-group input-group-merge">
+                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                 @error('password')
+                <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+            </div>
           </div>
+         
           <div class="mt-2">
-            <button type="submit" class="btn btn-primary me-2">SAVE</button>
+            <button type="submit" class="btn btn-dark me-2">SAVE</button>
             <button type="reset" class="btn btn-outline-secondary">CANCEL</button>
           </div>
-        </form>
-      </div>
-      <!-- /Account -->
+        </div>
+       <!-- /Account -->
+      </form>
     </div>
     {{-- <div class="card">
       <h5 class="card-header">Delete Account</h5>

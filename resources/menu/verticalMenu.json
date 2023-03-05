@@ -17,7 +17,7 @@
         {
           "url": "/create/agent",
           "name": "Register Agent",
-          "slug": "agent-create-agent"
+          "slug": "agent.create"
         },
         {
           "url": "/view/agent",
@@ -25,14 +25,14 @@
           "slug": "agent-view-agent"
         },
         {
-          "url": "/pages/account-settings-notifications",
-          "name": "Activate Accounts",
-          "slug": "pages-account-settings-notifications"
+          "url": "/active/agent",
+          "name": "Active Accounts",
+          "slug": "agent-activate-agent"
         },
         {
-          "url": "/pages/account-settings-notifications",
-          "name": "Deactivate Accounts",
-          "slug": "pages-account-settings-notifications"
+          "url": "/deactive/agent",
+          "name": "Inactive Accounts",
+          "slug": "agent-deactivate-agent"
         }
       ]
     },
