@@ -32,8 +32,8 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/forgot-password', [LoginController::class, 'index']);
 
 
-Route::group(['middleware'=> ['auth']], function () {
-        
+// Route::group(function () {
+
         // Dashboard Page Route
         Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
 
@@ -56,12 +56,12 @@ Route::group(['middleware'=> ['auth']], function () {
         //Transaction
         Route::get('/client/transaction', [TransactionController::class, 'clientTransaction'])->name('trans-client-transaction');
         Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
-        
-        //Logout 
+
+        //Logout
         Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-});
-    
+// });
+
 
 
 

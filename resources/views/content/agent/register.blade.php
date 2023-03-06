@@ -37,11 +37,11 @@
         </div>
         <hr class="my-0">
         <div class="card-body">
-         
+
           <div class="row">
             <div class="mb-3 col-md-6">
               <label for="name" class="form-label">Name</label>
-                    <input class="form-control  @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="John" required autofocus />                     
+                    <input class="form-control  @error('name') is-invalid @enderror" type="text" id="name" name="name" value="{{ old('name') }}" placeholder="John" required autofocus />
                      @error('name')
                      <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                      <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
                      </span>
-                     @enderror            
+                     @enderror
             </div>
             <div class="mb-3 col-md-6">
               <label for="phoneNumber" class="form-label">Phone Number</label>
@@ -64,7 +64,7 @@
                      <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
                      </span>
-                     @enderror  
+                     @enderror
             </div>
             <div class="mb-3 col-md-6">
               <label for="account_number" class="form-label">Account Number</label>
@@ -121,7 +121,7 @@
                 <option value="VFD Microfinance Bank Limited">VFD Microfinance Bank Limited</option>
                 <option value="Wema Bank Plc">Wema Bank Plc</option>
                 <option value="zenith">Zenith Bank</option>
-              </select>           
+              </select>
             </div>
             <div class="mb-3 col-md-6">
               <label for="address" class="form-label">Home Address</label>
@@ -131,7 +131,7 @@
                      <span class="invalid-feedback" role="alert">
                      <strong>{{ $message }}</strong>
                      </span>
-                     @enderror  
+                     @enderror
             </div>
             <div class="mb-3 col-md-6">
               <label class="form-label" for="gender">Gender</label>
@@ -154,9 +154,9 @@
               </div>
             </div>
           </div>
-         
+
           <div class="mt-2">
-            <button type="submit" class="btn btn-dark me-2">SAVE</button>
+            <button type="submit" class="btn btn-primary me-2">SAVE</button>
             <button type="reset" class="btn btn-outline-secondary">CANCEL</button>
           </div>
         </div>

@@ -34,7 +34,7 @@
       <div class="d-flex flex-row">
         <div class="col-sm-6">
           <div class="card-body">
-            <h5 class="card-title text-dark">TOTALCLIENTS</h5>
+            <h5 class="card-title text-dark">TOTAL CLIENTS</h5>
             <b>0</b>
           </div>
         </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
   </div>
-  
+
   <!-- Total Revenue -->
   <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
     <div class="card">
@@ -177,7 +177,7 @@
       </div>
     </div>
   </div>
-{{-- </div> 
+{{-- </div>
 <div class="row">
   <!-- Order Statistics -->
   <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
