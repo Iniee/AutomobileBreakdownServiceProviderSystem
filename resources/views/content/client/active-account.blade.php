@@ -1,16 +1,16 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'View All Agent')
+@section('title', 'Active Client')
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Agent /</span> Inactive Agents
+        <span class="text-muted fw-light">Client /</span> Active Clients
     </h4>
 
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                  <h5 class="card-header">Inactive Agents on System</h5>
+                  <h5 class="card-header">Active Clients on System</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-sm">
                         <thead>
@@ -18,18 +18,20 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Gender</th>
-                                <th>LGA</th>
+                                <th>Phone Number</th>
+                                <th>Home Address</th>
                                 <th>State</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->agent->agent_id }}</td>
-                                    <td>{{ $user->agent->name }}</td>
-                                    <td>{{ $user->agent->gender }}</td>
-                                    <td>{{ $user->agent->lga }}</td>
-                                    <td>{{ $user->agent->state }}</td>
+                                    <td>{{ $user->client->client_id }}</td>
+                                    <td>{{ $user->client->name }}</td>
+                                    <td>{{ $user->client->gender }}</td>
+                                    <td>{{ $user->client->phone_number }}</td>
+                                    <td>{{ $user->client->home_address }}</td>
+                                    <td>{{ $user->client->state }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

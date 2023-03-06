@@ -48,9 +48,14 @@
           "slug": "client-view-client"
         },
         {
-          "url": "/pages/account-settings-notifications",
-          "name": "Deactivate Accounts",
-          "slug": "pages-account-settings-notifications"
+          "url": "/active/client",
+          "name": "Active Accounts",
+          "slug": "client-activate-client"
+        },
+        {
+          "url": "/deactive/client",
+          "name": "Inactive Accounts",
+          "slug": "client-deactivate-client"
         }
       ]
     },
@@ -64,16 +69,6 @@
           "url": "/view/provider",
           "name": "View All provider",
           "slug": "provider-view-provider"
-        },
-        {
-          "url": "/pages/account-settings-notifications",
-          "name": "Activate Accounts",
-          "slug": "pages-account-settings-notifications"
-        },
-        {
-          "url": "/pages/account-settings-notifications",
-          "name": "Deactivate Accounts",
-          "slug": "pages-account-settings-notifications"
         }
       ]
     },

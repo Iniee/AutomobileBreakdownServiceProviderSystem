@@ -34,8 +34,8 @@
       <div class="d-flex flex-row">
         <div class="col-sm-6">
           <div class="card-body">
-            <h5 class="card-title text-dark">TOTALCLIENTS</h5>
-            <b>0</b>
+            <h5 class="card-title text-dark">TOTAL CLIENTS</h5>
+            <b>{{ $count = DB::table('clients')->count();  }}</b>
           </div>
         </div>
       </div>
@@ -48,7 +48,7 @@
         <div class="col-sm-6">
           <div class="card-body">
             <h5 class="card-title text-dark">TOTAL SERVICEPROVIDERS</h5>
-            <b>0</b>
+            <b>{{ $count = DB::table('service_provider')->count(); }} </b>
           </div>
         </div>
       </div>

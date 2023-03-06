@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Agent extends Model
+class Agent extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens,Notifiable;
 
     protected $primaryKey = 'agent_id';
 
@@ -47,4 +49,10 @@ class Agent extends Model
     public function user () {
         return $this->belongsTo(User::class);
     }
+
+     public function providers()
+    {
+        return $this->hasMany(Provider::class);
+    }
+
 }

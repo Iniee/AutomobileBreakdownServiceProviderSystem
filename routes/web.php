@@ -47,8 +47,9 @@ Route::group(['middleware'=> ['auth']], function () {
 
         //Client Side bar
         Route::get('/view/client', [ClientController::class, 'clientAccount'])->name('client-view-client');
-        Route::get('/deactivate/client', [ClientController::class, 'clientDeactivateAccount'])->name('client-deactivate-client');
-
+        Route::put('/client/{client}/status', [StatusController::class, 'clientStatus'])->name('client.status');
+        Route::get('/active/client', [ClientController::class, 'activeClient'])->name('client-activate-client');
+        Route::get('/deactive/client', [ClientController::class, 'deactiveClient'])->name('client-deactivate-client');
         //Provider Side bar
         Route::get('/view/provider', [ProviderController::class, 'providerAccount'])->name('provider-view-provider');
         Route::get('/deactivate/provider', [providerController::class, 'providerDeactivateAccount'])->name('provider-deactivate-provider');
