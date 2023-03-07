@@ -29,7 +29,7 @@ Route::get('/', function () { return redirect('/login'); });
 // Authentication
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::get('/forgot-password', [LoginController::class, 'index']);
+Route::get('/forgot-password', [LoginController::class, 'forgotPassword']);
 
 
 Route::group(['middleware'=> ['auth']],function () {
