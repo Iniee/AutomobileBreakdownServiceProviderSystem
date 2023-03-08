@@ -12,7 +12,7 @@
             <div class="card">
                 <h5 class="card-header">Providers on System</h5>
                 <div class="table-responsive text-nowrap">
-                    <table class="table table-sm">
+                    <table class="table table-borderless">
                         <thead>
                             <tr>
                                 <th>ID</th>

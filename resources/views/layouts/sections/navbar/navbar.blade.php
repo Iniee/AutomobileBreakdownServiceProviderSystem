@@ -4,6 +4,8 @@ $navbarDetached = ($navbarDetached ?? '');
 
 @endphp
 
+
+
 <!-- Navbar -->
 @if(isset($navbarDetached) && $navbarDetached == 'navbar-detached')
 <nav class="layout-navbar {{$containerNav}} navbar navbar-expand-xl {{$navbarDetached}} align-items-center bg-navbar-theme" id="layout-navbar">
@@ -70,7 +72,7 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-semibold d-block">John Doe</span>
+                      <span class="fw-semibold d-block">{{ Auth::user()->role }}</span>
                       <small class="text-muted">Admin</small>
                     </div>
                   </div>
