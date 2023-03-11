@@ -3,26 +3,16 @@
 @section('title', 'Payment Status')
 
 @section('content')
-<h5 class="mb-9">Transaction Details</h5>
-<div class="table-responsive text-nowrap">
-    <table class="table card-table">
-        <thead>
-            <tr>
-                <th>Client Name</th>
-                <th>Amount</th>
-                <th>Status</th>
+ <div class="col-md-6 col-lg-12 d-flex flex-column align-items-center">
+<h6 class="mt-2 text-muted">Transaction Details</h6>
+    <div class="card mb-4">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Client Name: {{ $result['data']['metadata']['name'] }}</li>
+        <li class="list-group-item">Charged Amount: {{ $result['data']['metadata']['amount'] }}</li>
+        <li class="list-group-item">Status: {{ $result['data']['status'] }}</li>
+      </ul>
+    </div>
+ </div>
 
-            </tr>
-        </thead>
-        <tbody class="table-border-bottom-0">
-            <tr>
-                <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $result['data']['metadata']['name'] }}</strong></td>
-                <td>{{ $result['data']['metadata']['amount'] }}</td>
-                <td>{{ $result['data']['status'] }}</td>
-            </tr>
-            <tr>
-        </tbody>
-    </table>
-</div>
 <!--/ Table within card -->
 @endsection
