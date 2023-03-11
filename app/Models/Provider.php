@@ -27,6 +27,7 @@ class Provider extends Authenticatable
             'business_address',
             'lga',
             'gender',
+            'verified_by_agent',
             'type',
             'status',
             'account_number',

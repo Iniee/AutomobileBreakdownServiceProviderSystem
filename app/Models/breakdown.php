@@ -16,6 +16,7 @@ class Breakdown extends Model
     protected $fillable = [
         'breakdown_id',
         'breakdown_location',
-        'destination_location'
+        'destination_location',
+        'status'
     ];
 }

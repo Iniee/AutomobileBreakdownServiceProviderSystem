@@ -30,6 +30,7 @@ class RegisterRequest extends FormRequest
           'phone_number' => 'required|max:11|min:11|string|unique:agents,phone_number',
           'home_address' => 'required|string',
           'gender' => 'required|in:male,female',
+          'profile_picture' => 'required',
           'password' => ['required', 'string', 'confirmed', 'min:8' ],
         ];
     }

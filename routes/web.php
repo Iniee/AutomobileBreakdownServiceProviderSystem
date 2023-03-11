@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\ClientController;
-use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\LoginController;
-use App\Http\Controllers\Admin\ProviderController;
-use App\Http\Controllers\Admin\StatusController;
-use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\StatusController;
+use App\Http\Controllers\Admin\ProviderController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Route::get('/', function () { return redirect('/login'); });
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/forgot-password', [LoginController::class, 'forgotPassword']);
-
+Route::get('payment/status', [PaymentController::class, 'checkPaymentStatus'])->name('payment.status');
 
 Route::group(['middleware'=> ['auth']],function () {
 

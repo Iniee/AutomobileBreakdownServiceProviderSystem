@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('diagnoses', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
             $table->decimal('cost', 10,2);
             $table->unsignedBigInteger('provider_id');
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('breakdown_id')->nullable();
+            $table->unsignedBigInteger('breakdown_id');
             $table->foreign('provider_id')->references('sp_id')->on('service_provider');
             $table->foreign('client_id')->references('client_id')->on('clients');
             $table->foreign('breakdown_id')->references('breakdown_id')->on('breakdowns');

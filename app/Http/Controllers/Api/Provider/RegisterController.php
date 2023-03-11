@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Provider;
 use CURLFile;
 use App\Models\User;
 use App\Models\Provider;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -19,6 +20,7 @@ class RegisterController extends Controller
             $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'push_notification_token' => $request->push_notification_token,
             'role' => 'provider'
         ]);
 
@@ -124,7 +126,8 @@ class RegisterController extends Controller
           return response()->json([
                 'status' => true,
                 'message' => 'Service Provider Created Successfully,Login to Generate Token',
-                'Provider' =>  $provider->name
+                'Provider' =>  $provider->name,
+                'ftoken' => $user->push_notification_token
             ]);
         } else {
             return response()->json([

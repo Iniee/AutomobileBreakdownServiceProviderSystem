@@ -25,8 +25,8 @@ class WalletController extends Controller
         //dd($client);  
    
       $transaction= FundWallet::where('client_id', $client->client_id)->get();
-      return $this->success([
-        'Transactions' =>$transaction,
+      return response()->json([
+        'data' =>$transaction,
     ]);
 
     }

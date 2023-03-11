@@ -154,11 +154,7 @@ class AgentController extends Controller
             return redirect()->route('dashboard');   
     }
    
-            // public function totalAgent()
-            // {
-            //    $agentCount = DB::table('agents')->count();
-            //    return view("content.dashboard.dashboards-analytics", compact('agentCount'));
-            // }
+        
             public function agentDeactivateAccount()
             {
                 return view('content.agent.deactivate-account');

@@ -32,8 +32,13 @@
                                     <span class="d-none d-sm-block">Upload new photo</span>
                                     <i class="bx bx-upload d-block d-sm-none"></i>
                                     <input type="file" id="upload" name="profile_picture"
-                                        value="{{ old('profile_picture') }}" class="account-file-input"
+                                        value="{{ old('profile_picture') }}" class="account-file-input @error('profile_picture') is-invalid @enderror"
                                         enctype="multipart/form-data" hidden accept="image/png, image/jpeg" />
+                                        @error('profile_picture')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </label>
                                 <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
                             </div>

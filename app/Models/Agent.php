@@ -50,9 +50,4 @@ class Agent extends Authenticatable
         return $this->belongsTo(User::class);
     }
 
-     public function providers()
-    {
-        return $this->hasMany(Provider::class);
-    }
-
 }

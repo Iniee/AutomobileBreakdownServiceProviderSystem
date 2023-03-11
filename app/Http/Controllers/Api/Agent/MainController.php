@@ -101,12 +101,14 @@ class MainController extends Controller
     }
 
     //List of Unapproved Service Provider in the Same Lga as the agent
-    public function dashboard()
+     public function dashboard()
     {
-          $data = DB::table('service_provider')
+        $user = Auth::user();
+        $agent = Agent::where('user_id', $user->id)->first();
+        $data = DB::table('service_provider')
                ->where([
                 ['status', 'pending'],
-                ['lga', auth()->user()->lga]
+                ['lga', $agent->lga]
             ])->get();
        
         return response()->json([
@@ -120,7 +122,6 @@ class MainController extends Controller
         ]);
     }
 
-
     public function view($id)
     {
         $unapproved_id = DB::table('service_provider')->get($id);
@@ -130,13 +131,15 @@ class MainController extends Controller
 
     public function viewApproved()
     {
+        $user = Auth::user();
+        $agent = Agent::where('user_id', $user->id)->first();
         $data = DB::table('service_provider')
                ->where([
-                ['status', 'approved'],
-                ['lga', auth()->user()->lga],
-                ['verified_by_agent', auth()->user()->agent_id]
+                ['status', 'Approved'],
+                ['lga', $agent->lga]
             ])->get();
-           return response()->json([
+       
+        return response()->json([
             'status' => true,
             'message' => 'List of Approved Service Provider in the Same Lga as the agent',
             'data' => $data

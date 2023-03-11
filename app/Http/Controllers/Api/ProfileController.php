@@ -20,11 +20,15 @@ class ProfileController extends Controller
         'status' => true,
         'data' => [
             'status'=> $user->status,
+            'role' => $user->role,
             'name' => $client->name,
             'email' => $user->email,
+            'phone_number' => $client->phone_number,
+            'gender' => $client->gender,
             'wallet_balance' => $client->wallet_balance,
             'profile picture' => $client->profile_picture,
-            'home address' => $client->home_address
+            'home address' => $client->home_address,
+            'ftoken' => $user->push_notification_token
         ]
       ]);
       } 
@@ -37,14 +41,18 @@ class ProfileController extends Controller
         'status' => true,
         'data' => [
             'status'=> $user->status,
+            'role' => $user->role,
             'name' => $provider->name,
             'email' => $user->email,
+            'phone_number' => $provider->phone_number,
+            'gender' =>  $provider->gender,
             'LGA' => $provider->lga,
             'type' => $provider->type,
             'profile picture' => $provider->profile_picture,
             'business_address' => $provider->business_address,
             'account_number' => $provider->account_number,
             'bank' => $provider->bank_name,
+            'ftoken' => $user->push_notification_token
         ]
       ]);
       } else {
@@ -52,8 +60,11 @@ class ProfileController extends Controller
         'status' => true,
         'data' => [
             'status'=> $user->status,
+            'role' => $user->role,
             'name' => $provider->name,
             'email' => $user->email,
+            'phone_number' => $provider->phone_number,
+            'gender' =>  $provider->gender,
             'LGA' => $provider->lga,
             'type' => $provider->type,
             'plate number' => $provider->plate_number,
@@ -61,6 +72,7 @@ class ProfileController extends Controller
             'business_address' => $provider->business_address,
             'account_number' => $provider->account_number,
             'bank' => $provider->bank_name,
+            'ftoken' => $user->push_notification_token
         ]
       ]);
       }      
@@ -76,9 +88,11 @@ class ProfileController extends Controller
             'role' => $user->role,
             'name' => $agent->name,
             'email' => $user->email,
-            'state' => $user->state,
+            'phone_number' => $agent->phone_number,
+            'gender' =>  $agent->gender,
             'LGA' => $agent->lga,
             'profile picture' => $agent->profile_picture,
+            'ftoken' => $user->push_notification_token
         ]
       ]);
      }

@@ -22,9 +22,8 @@ return new class extends Migration
             $table->decimal('destination_latitude', 10,8)->nullable();
             $table->decimal('destination_longitude', 11,8)->nullable();
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('service_provider')->nullable();
             $table->foreign('client_id')->references('client_id')->on('clients');
-            $table->foreign('service_provider')->references('sp_id')->on('service_provider');
+            $table->enum('status', ['requested', 'accepted', 'rejected'])->nullable();
             $table->timestamps();
         });
     }

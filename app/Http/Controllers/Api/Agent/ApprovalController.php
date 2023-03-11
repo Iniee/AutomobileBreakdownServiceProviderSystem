@@ -16,16 +16,31 @@ use App\Http\Requests\Agent\ApprovalRequest;
 class ApprovalController extends Controller
 {
     use HttpResponses;
-    public function artisanstore(ApprovalRequest $request,$id)
-    {
-        $id = Provider::find($id);
+ 
 
-        $request->validated($request->all());
-        $user = auth()->user();
-        //dd($user);
-        $agent = Agent::where('user_id', $user->id)->first();
-        //dd($agent);       
-        //Create the form
+    public function artisanstore(Request $request,$id)
+    {
+        
+         $id = Provider::find($id);
+         $user = auth()->user();
+         //dd($user);
+         $agent = Agent::where('user_id', $user->id)->first();
+         if ($id->type == 'Artisan'){
+            $artisandata = Validator::make($request->all(),
+            [
+                'document' => 'required',
+                'address_confirmation'=> 'required|boolean',
+            ]);
+
+              if($artisandata->fails()){
+                return response()->json([
+                    'status' => false,
+                    'message' => 'validation error',
+                    'errors' => $artisandata->errors()
+                ], 401);
+            }
+
+            //Create the form
         $approvaldata = Approval::create([
             'document' => $request->document,
             'address_confirmation' => $request->address_confirmation,
@@ -94,42 +109,37 @@ class ApprovalController extends Controller
             return response()->json([
                 'status' => 'Status Updated Successfully',
                 'message' => $id->status,
-                'provider' => $id->first_name,
-                'agent' => $agent->first_name
+                'provider' => $id->name,
+                'agent' => $agent->name
             ]);
         } else
             return response()->json([
                 'status' => 'Status Updated Successfully',
                 'message' =>  $id->status,
-                'provider' => $id->first_name
+                'provider' => $id->name
 
             ]);
-    }
 
-    public function driverstore(Request $request,$id)
-    {
-          $validatedata = Validator::make($request->all(),
+         }
+        else {
+           $driverdata = Validator::make($request->all(),
             [
                 'document' => 'required',
                 'plate_number' => 'required|boolean',
                 'address_confirmation'=> 'required|boolean',
             ]);
 
-              if($validatedata->fails()){
+              if($driverdata->fails()){
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
-                    'errors' => $validatedata->errors()
+                    'errors' => $driverdata->errors()
                 ], 401);
             }
 
-        $id = Provider::find($id);
-         $user = auth()->user();
-        //dd($user);
-        $agent = Agent::where('user_id', $user->id)->first();
-        //dd($agent);    
+    
         //Create the form
-        $approvaldata = Approval::create([
+        $cabapprovaldata = Approval::create([
             'document' => $request->document,
             'plate_number' => $request->plate_number,
             'address_confirmation' => $request->address_confirmation,
@@ -180,14 +190,14 @@ class ApprovalController extends Controller
                 $public_url = $data->url;
 
                 // update the client's profile picture URL in the database
-                $approvaldata->document = $public_url;
-                $approvaldata->save();
+                $cabapprovaldata->document = $public_url;
+                $cabapprovaldata->save();
             }
         }
 
-        if ($approvaldata['plate_number'] == true && $approvaldata['address_confirmation'] == true && !empty($approvaldata['document'])) {
-            $approvaldata->status = 'Approved';
-            $approvaldata->save();
+        if ($cabapprovaldata['plate_number'] == true && $cabapprovaldata['address_confirmation'] == true && !empty($cabapprovaldata['document'])) {
+            $cabapprovaldata->status = 'Approved';
+            $cabapprovaldata->save();
 
             // Update the provider status column
             $id->status = "Approved";
@@ -197,16 +207,21 @@ class ApprovalController extends Controller
             return response()->json([
                 'status' => 'Status Updated Successfully',
                 'message' =>   $id->status,
-                'provider' => $id->first_name,
-                'agent' =>$agent->first_name
+                'provider' => $id->name,
+                'agent' =>$agent->name
             ]);
         } else
             return response()->json([
                 'status' => 'Status Updated Successfully',
                 'message' =>  $id->status,
-                'provider' => $id->first_name
+                'provider' => $id->name,
+                'agent' =>$agent->name
 
-            ]);
+
+            ]);       
+        } 
+
+         
     }
 
 

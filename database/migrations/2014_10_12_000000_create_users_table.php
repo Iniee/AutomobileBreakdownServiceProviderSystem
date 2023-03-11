@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-       Schema::create('users', function (Blueprint $table) {
+         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('role');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('status', ['active', 'pending'])->default('pending');
+            $table->enum('status', ['blocked', 'active', 'pending'])->default('pending');
+            $table->string('push_notification_token')->nullable();
             $table->rememberToken();
             $table->string('password');
             $table->timestamps();
