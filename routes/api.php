@@ -103,7 +103,7 @@ Route::middleware(['auth:sanctum', 'auth.agent'])->group(function () {
 Route::middleware(['auth:sanctum', 'auth.provider'])->group(function () {
     Route::post('artisan/diagnosis/card/{id}', [DiagnosisController::class, 'store']);
     Route::get('provider/rating', [RatingController::class, 'ProviderAvgRating']);
-    
+
     Route::get('index', [IndexController::class, 'index']);
     //Profile
      //Update Profile
@@ -117,7 +117,7 @@ Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
     Route::post('pay', [PaymentController::class, 'index'])->name('pay');
     Route::get('payment/status', [PaymentController::class, 'status'])->name('payment.status');
     Route::get('client/view/transaction', [WalletController::class, 'viewtransaction']);
-    
+
    //Register breakdown service
     Route::post('client/breakdown/artisan', [BreakdownController::class, 'artisan_breakdown']);
     Route::post('client/breakdown/towtruck', [BreakdownController::class, 'towtruckBreakdown']);
@@ -128,7 +128,7 @@ Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
     Route::get('client/profile', [ClientProfileController::class, 'getProfile']);
     //Update Profile
     Route::post('client/updateProfile', [ClientProfileController::class, 'updateProfile']);
-    
+
     //Details
     Route::get('provider/details/{id}', [BreakdownController::class, 'detailsProvider']);
     Route::post('artisan/request', [BreakdownController::class, 'artisanRequest']);
@@ -150,8 +150,12 @@ Route::middleware(['auth:sanctum', 'auth.admin'])->group(function () {
       Route::get('count/client', [AdminMainController::class, 'countClient']);
       Route::get('count/agent', [AdminMainController::class, 'countAgent']);
       Route::get('count/provider', [AdminMainController::class, 'countProvider']);
-      
+
 
       //Route::post('register', [AgentAuthController::class,'register' ]);
 
 });
+
+use App\Http\Controllers\Admin\SearchController;
+
+Route::get('/agent/search', [SearchController::class, 'searchAgentTable'])->name('searchAgent');

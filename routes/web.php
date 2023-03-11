@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ProviderController;
 use App\Http\Controllers\Admin\StatusController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,32 +35,39 @@ Route::get('/forgot-password', [LoginController::class, 'forgotPassword']);
 
 Route::group(['middleware'=> ['auth']],function () {
 
-        // Dashboard Page Route
-        Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
+  // Dashboard Page Route
+  Route::get('/dashboard', [DashboardController::class, 'getDashboard'])->name('dashboard');
 
-        //Agent side bar
-        Route::get('/view/agent', [AgentController::class, 'agentAccount'])->name('agent-view-agent');
-        Route::any('/create/agent', [AgentController::class, 'register'])->name('agent.create');
-        Route::any('/store/user', [AgentController::class, 'store'])->name('agent.store');
-        Route::put('/agent/{agent}/status', [StatusController::class, 'updateStatus'])->name('agent.status');
-        Route::get('/active/agent', [AgentController::class, 'activeAgent'])->name('agent-activate-agent');
-        Route::get('/deactive/agent', [AgentController::class, 'deactiveAgent'])->name('agent-deactivate-agent');
+  //Agent side bar
+  Route::get('/view/agent', [AgentController::class, 'agentAccount'])->name('agent-view-agent');
+  Route::any('/create/agent', [AgentController::class, 'register'])->name('agent.create');
+  Route::any('/store/user', [AgentController::class, 'store'])->name('agent.store');
+  Route::put('/agent/{agent}/status', [StatusController::class, 'updateStatus'])->name('agent.status');
+  Route::get('/active/agent', [AgentController::class, 'activeAgent'])->name('agent-activate-agent');
+  Route::get('/deactive/agent', [AgentController::class, 'deactiveAgent'])->name('agent-deactivate-agent');
 
-        //Client Side bar
-        Route::get('/view/client', [ClientController::class, 'clientAccount'])->name('client-view-client');
-        Route::put('/client/{client}/status', [StatusController::class, 'clientStatus'])->name('client.status');
-        Route::get('/active/client', [ClientController::class, 'activeClient'])->name('client-activate-client');
-        Route::get('/deactive/client', [ClientController::class, 'deactiveClient'])->name('client-deactivate-client');
-        //Provider Side bar
-        Route::get('/view/provider', [ProviderController::class, 'providerAccount'])->name('provider-view-provider');
-        Route::get('/deactivate/provider', [providerController::class, 'providerDeactivateAccount'])->name('provider-deactivate-provider');
+  //Client Side bar
+  Route::get('/view/client', [ClientController::class, 'clientAccount'])->name('client-view-client');
+  Route::put('/client/{client}/status', [StatusController::class, 'clientStatus'])->name('client.status');
+  Route::get('/active/client', [ClientController::class, 'activeClient'])->name('client-activate-client');
+  Route::get('/deactive/client', [ClientController::class, 'deactiveClient'])->name('client-deactivate-client');
+  //Provider Side bar
+  Route::get('/view/provider', [ProviderController::class, 'providerAccount'])->name('provider-view-provider');
+  Route::get('/deactivate/provider', [providerController::class, 'providerDeactivateAccount'])->name('provider-deactivate-provider');
 
-        //Transaction
-        Route::get('/client/transaction', [TransactionController::class, 'clientTransaction'])->name('trans-client-transaction');
-        Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
+  //Transaction
+  Route::get('/client/transaction', [TransactionController::class, 'clientTransaction'])->name('trans-client-transaction');
+  Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
 
-        //Logout
-        Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+  //Logout
+  Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+
+  //Search
+  Route::get('/agent/search', [SearchController::class, 'searchAgentTable'])->name('searchAgent');
+  Route::get('/client/search', [SearchController::class, 'searchClientTable'])->name('searchClient');
+  Route::get('/provider/search', [SearchController::class, 'searchSevriceProviderTable'])->name('searchProvider');
 
 });
 
