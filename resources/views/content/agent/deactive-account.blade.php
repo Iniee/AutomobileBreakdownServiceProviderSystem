@@ -1,6 +1,9 @@
 @extends('layouts/contentNavbarLayout')
 
 @section('title', 'View All Agent')
+@section('search', '/inactive/agents/search')
+@section('searchQuery', 'name or LGA')
+
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
@@ -35,11 +38,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer py-4">
+                {{-- <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
                         {{ $users->links('pagination::bootstrap-5') }}
                     </nav>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

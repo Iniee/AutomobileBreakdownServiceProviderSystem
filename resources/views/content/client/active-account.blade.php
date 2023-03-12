@@ -2,6 +2,10 @@
 
 @section('title', 'Active Client')
 
+@section('search', '/active/clients/search')
+@section('searchQuery', 'name or phone number')
+
+
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Client /</span> Active Clients
@@ -37,11 +41,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="card-footer py-4">
+                {{-- <div class="card-footer py-4">
                     <nav class="d-flex justify-content-end" aria-label="...">
                         {{ $users->links('pagination::bootstrap-5') }}
                     </nav>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

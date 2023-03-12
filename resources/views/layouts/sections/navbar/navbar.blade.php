@@ -44,7 +44,7 @@ $navbarDetached = ($navbarDetached ?? '');
             {{-- <div > --}}
             <form action="@yield('search')" method="get" class="nav-item d-flex align-items-center">
               <i class="bx bx-search fs-4 lh-0"></i>
-              <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..." name = "search">
+              <input type="text" class="form-control border-0 shadow-none" placeholder="Search by @yield('searchQuery')" aria-label="Search..." name = "search">
             </form>
             {{-- </div> --}}
           </div>

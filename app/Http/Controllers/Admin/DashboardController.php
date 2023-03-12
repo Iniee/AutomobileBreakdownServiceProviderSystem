@@ -9,8 +9,13 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function getDashboard()
-   {
+  public function getDashboard()
+  {
     return view('content.dashboard.dashboards-analytics');
-   }
+  }
+
+  public function Profile(){
+    $profile = Admin::all();
+    return $profile;
+  }
 }

@@ -2,6 +2,7 @@
 
 @section('title', 'View All Provider')
 @section('search', '/provider/search')
+@section('searchQuery', 'name or LGA')
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
