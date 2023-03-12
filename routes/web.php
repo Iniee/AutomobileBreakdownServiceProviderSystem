@@ -64,10 +64,20 @@ Route::group(['middleware'=> ['auth']],function () {
 
 
 
-  //Search
+  /////////////Search
   Route::get('/agent/search', [SearchController::class, 'searchAgentTable'])->name('searchAgent');
+  Route::get('/active/agents/search', [SearchController::class, 'searchActiveAgents'])->name('searchActiveAgent');
+  Route::get('/inactive/agents/search', [SearchController::class, 'searchInactiveAgents'])->name('searchInactiveAgent');
+
   Route::get('/client/search', [SearchController::class, 'searchClientTable'])->name('searchClient');
+  Route::get('/active/clients/search', [SearchController::class, 'searchActiveClients'])->name('searchActiveClient');
+  Route::get('/inactive/clients/search', [SearchController::class, 'searchInactiveClients'])->name('searchInactiveClient');
+
   Route::get('/provider/search', [SearchController::class, 'searchSevriceProviderTable'])->name('searchProvider');
+  
+  Route::get('/transaction/search', [SearchController::class, 'searchTransactionTable'])->name('searchTransaction');
+
+  //////////////End Search
 
 });
 

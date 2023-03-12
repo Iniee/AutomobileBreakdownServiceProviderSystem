@@ -2,6 +2,8 @@
 
 @section('title', 'View All Client')
 @section('search', '/client/search')
+@section('searchQuery', 'name or phone number')
+
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
