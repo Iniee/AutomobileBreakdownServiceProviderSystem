@@ -57,6 +57,10 @@ Route::post('agent/register', [AgentRegisterController::class, 'register']);
 //Admin Auth
 Route::post('admin/register', [AdminRegisterController::class, 'register']);
 
+//Accept/Decline Endpoint
+Route::post('artisan/request/status/{id}', [RequestController::class, 'requestSP']);
+Route::get('status/type/{id}', [RequestController::class, 'statustype']);
+Route::get('sp/data/status/{id}', [RequestController::class, 'spdata']);
 
 
 //Profile

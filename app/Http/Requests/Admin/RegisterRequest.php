@@ -24,11 +24,13 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-          'first_name' => 'required|string|max:50',
-          'last_name' => 'required|string|max:50',
+          'name' => 'required|string|max:50',
+          'phone_number' => 'string|max:11,min:10',
           'gender' => 'required|in:male,female',
           'password' => ['required', 'string', 'confirmed', 'min:8' ],
           'email' => 'required|email|unique:users,email|string',
+          'account_number' => 'string|max:10,min:10',
+          'bank_name' => 'string',
         ];
     }
 }

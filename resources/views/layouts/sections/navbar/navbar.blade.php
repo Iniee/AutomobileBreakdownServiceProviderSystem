@@ -74,7 +74,7 @@ $navbarDetached = ($navbarDetached ?? '');
                       </div>
                     </div>
                     <div class="flex-grow-1">
-                      <span class="fw-semibold d-block">{{ Auth::user()->admin->first_name }}</span>
+                      <span class="fw-semibold d-block">{{ Auth::user()->admin->name }}</span>
                       <small class="text-muted">Admin</small>
                     </div>
                   </div>
@@ -84,9 +84,18 @@ $navbarDetached = ($navbarDetached ?? '');
                 <div class="dropdown-divider"></div>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0);">
+                 <a class="dropdown-item" href="{{ route('admin.profile') }}">
+                  {{-- javascript:void(0); --}}
                   <i class="bx bx-user me-2"></i>
                   <span class="align-middle">My Profile</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item" href="{{ route('admin.changePasswordPage') }}">
+                  {{-- javascript:void(0); --}}
+                  <i class="bx bx-user me-2"></i>
+                  <span class="align-middle">Change Password</span>
                 </a>
               </li>
 

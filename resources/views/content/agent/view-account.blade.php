@@ -2,7 +2,7 @@
 
 @section('title', 'View All Agent')
 @section('search', '/agent/search')
-@section('searchQuery', 'name or LGA')
+@section('searchQuery', 'Name or LGA')
 
 
 @section('content')

@@ -18,9 +18,10 @@ class ClientController extends Controller
    public function deactiveClient()
     {
             $users = User::where([
-                ['status', 'pending'],
+                ['status', '!=', 'active'],
                 ['role', 'client']
-            ])->with('client')->latest('created_at')->paginate(20);          
+            ])->with('client')->latest('created_at')->paginate(20);
+            
             return view('content.client.deactive-account', compact('users'));
     }
     public function activeClient()
@@ -28,7 +29,8 @@ class ClientController extends Controller
              $users = User::where([
                 ['status', 'active'],
                 ['role', 'client']
-            ])->with('client')->latest('created_at')->paginate(20);          
+            ])->with('client')->latest('created_at')->paginate(20);       
+          
             return view('content.client.active-account', compact('users'));
     }
    

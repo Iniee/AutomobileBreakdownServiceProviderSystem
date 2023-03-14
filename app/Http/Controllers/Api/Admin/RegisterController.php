@@ -26,9 +26,11 @@ class RegisterController extends Controller
         
         $admin = Admin::create([
             'user_id' => $user->id,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
             'gender' => $request->gender,
+            'account_number' => $request->account_number,
+            'bank_name' => $request->bank_name,
          
         ]);
 

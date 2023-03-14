@@ -63,7 +63,6 @@ class SearchController extends Controller
     $clients = Client::where('name', 'LIKE', '%'.$query. '%')
                         ->orWhere('phone_number', 'LIKE', '%'.$query. '%')
                         ->get();
-    dd($clients);
     return view('content.client.view-account', compact('clients'));
 
   }
@@ -116,7 +115,9 @@ class SearchController extends Controller
   public function searchTransactionTable(Request $request){
     $query = $request->input('search');
 
-    $transactions = FundWallet::where('charged_amount', $query)->get();
+    $transactions = FundWallet::where('charged_amount', $query)
+                               ->orWhere('client_name', 'LIKE', '%'.$query. '%')
+                               ->get();
 
     return view('content.transaction.client', compact('transactions'));
 

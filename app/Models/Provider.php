@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Agent;
+use App\Models\Request;
+use App\Models\Breakdown;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -52,5 +54,15 @@ class Provider extends Authenticatable
     public function agent()
     {
         return $this->belongsTo(Agent::class);
+    }
+
+     public function breakdowns()
+    {
+        return $this->hasMany(Breakdown::class);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
     }
 }

@@ -2,7 +2,7 @@
 
 @section('title', 'View All Client')
 @section('search', '/client/search')
-@section('searchQuery', 'name or phone number')
+@section('searchQuery', 'Name or Phone number')
 
 
 @section('content')

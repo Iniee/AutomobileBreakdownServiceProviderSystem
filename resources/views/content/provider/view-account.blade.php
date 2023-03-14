@@ -21,6 +21,7 @@
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Business Address</th>
+                                <th>Type</th>
                                 <th>State</th>
                                 <th>LGA</th>
                                 <th>Verified By</th>
@@ -34,6 +35,7 @@
                                     <td>{{ $provider->name }}</td>
                                     <td>{{ $provider->phone_number }}</td>
                                     <td>{{ $provider->business_address }}</td>
+                                    <td>{{ $provider->type }}</td>
                                     <td>{{ $provider->state }}</td>
                                     <td>{{ $provider->lga }}</td>
                                     <td>{{ $provider->verified_by_agent ?? 'null' }}</td>

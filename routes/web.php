@@ -80,6 +80,14 @@ Route::group(['middleware'=> ['auth']],function () {
 
   //////////////End Search
 
+   // Admin Profile
+  Route::get('/profile/admin', [DashboardController::class, 'showProfileDetails'])->name('admin.profile');
+  Route::any('/update/admin', [DashboardController::class, 'updateProfileDetails'])->name('admin.update');
+
+  //Admin Change Password
+  Route::get('/password/admin', [DashboardController::class, 'changePasswdPage'])->name('admin.changePasswordPage');
+  Route::any('/changePasswd/admin', [DashboardController::class, 'changePassword'])->name('admin.changePassword');
+
 });
 
 

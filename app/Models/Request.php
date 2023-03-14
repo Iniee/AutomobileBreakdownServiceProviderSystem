@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Provider;
+use App\Models\Breakdown;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Request extends Model
 {
@@ -15,4 +17,13 @@ class Request extends Model
         'breakdown_id', 
         'provider_id',
     ];
+
+    public function provider()
+    {
+        return $this->belongsTo(Provider::class);
+    }
+     public function breakdown()
+    {
+        return $this->belongsTo(Breakdown::class);
+    }
 }
