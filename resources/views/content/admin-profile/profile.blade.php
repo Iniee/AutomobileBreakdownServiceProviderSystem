@@ -132,7 +132,7 @@
                       <label for="text" class="form-label">Phone Number</label>
                       <input class="form-control @error('phone_number') is-invalid @enderror" type="text"
                           id="email" name="phone_number" value="{{ $user->phone_number }}"
-                          placeholder="john.doe@example.com" required readonly/>
+                          placeholder="08000000000" required readonly/>
                       @error('phone_number')
                           <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
