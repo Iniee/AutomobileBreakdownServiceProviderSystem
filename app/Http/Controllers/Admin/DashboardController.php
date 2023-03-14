@@ -74,5 +74,9 @@ class DashboardController extends Controller
 
       return redirect('/dashboard');
     }
+
+    return redirect()->back()->withErrors([
+      'password' => 'The current password is incorrect',
+  ]);
   }
 }

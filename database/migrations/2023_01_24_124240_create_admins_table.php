@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class, 'user_id')->constrained()->onDelete('cascade');
             $table->string('gender');
             $table->string('phone_number')->nullable();
-            $table->integer('account_number')->nullable();
+            $table->string('account_number')->nullable();
             $table->string('bank_name')->nullable();
             $table->timestamps();
         });

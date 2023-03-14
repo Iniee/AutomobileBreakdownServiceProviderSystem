@@ -75,7 +75,7 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/inactive/clients/search', [SearchController::class, 'searchInactiveClients'])->name('searchInactiveClient');
 
   Route::get('/provider/search', [SearchController::class, 'searchSevriceProviderTable'])->name('searchProvider');
-  
+
   Route::get('/transaction/search', [SearchController::class, 'searchTransactionTable'])->name('searchTransaction');
 
   //////////////End Search
@@ -86,7 +86,7 @@ Route::group(['middleware'=> ['auth']],function () {
 
   //Admin Change Password
   Route::get('/password/admin', [DashboardController::class, 'changePasswdPage'])->name('admin.changePasswordPage');
-  Route::any('/changePasswd/admin', [DashboardController::class, 'changePassword'])->name('admin.changePassword');
+  Route::any('/changePassword/admin', [DashboardController::class, 'changePassword'])->name('admin.changePassword');
 
 });
 
