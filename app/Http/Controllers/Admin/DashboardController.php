@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\FundWallet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,15 +13,15 @@ class DashboardController extends Controller
 {
   public function getDashboard()
   {
+    $transaction = FundWallet::sum('charged_amount');
+    
     return view('content.dashboard.dashboards-analytics');
   }
 
   public function showProfileDetails()
   {
-    $users = auth()->user()->where([
-      ['role', 'admin'],
-      ['status', 'active']
-    ])->join('admins', 'admins.user_id', '=', 'users.id')->get();
+    
+    $users = auth()->user()->where('role', 'admin')->join('admins', 'admins.user_id', '=', 'users.id')->get();
     // dd($users);
     return view('content.admin-profile.profile', compact('users'));
   }
@@ -30,23 +31,12 @@ class DashboardController extends Controller
   public function updateProfileDetails(Request $request)
   {
     $validatedData = $request->validate([
-      // 'name' => 'required|string|max:50',
-      // 'email' => 'required|email|unique:users,email|string',
-      // 'phone_number' => 'required|max:11|min:11|string|unique:admins,phone_number',
       'account_number' => 'required|string|max:10|min:10',
       'bank_name' => 'required|string',
-      // 'gender' => 'required|in:male,female',
     ]);
-    $user = auth()->user()->where([
-      ['role', 'admin'],
-      ['status', 'active']
-    ])->join('admins', 'admins.user_id', '=', 'users.id')->update([
-      // "name" => $validatedData['name'],
-      // "email" => $validatedData['email'],
-      // "phone_number" => $validatedData['phone_number'],
+    $user = auth()->user()->where('role', 'admin')->join('admins', 'admins.user_id', '=', 'users.id')->update([
       "account_number" => $validatedData['account_number'],
       "bank_name" => $validatedData['bank_name'],
-      // "gender" => $validatedData['gender'],
     ]);
     return redirect('/dashboard');
   }

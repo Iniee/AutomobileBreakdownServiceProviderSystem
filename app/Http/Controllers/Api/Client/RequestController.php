@@ -120,6 +120,9 @@ class RequestController extends Controller
                 'type' =>  $spdata->type,
                 'plate_number' => $spdata->plate_number,
                 'phone_number' =>  $spdata->phone_number,
+                'latitude' => $spdata->latitude,
+                'longitude' => $spdata->longitude,
+                'business_address' => $spdata->business_address,
             ]);
         }
     }

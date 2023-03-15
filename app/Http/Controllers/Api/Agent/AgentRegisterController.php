@@ -27,7 +27,8 @@ class AgentRegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'push_notification_token' => $request->push_notification_token,
-                'role' => 'agent'
+                'role' => 'agent',
+                'status' => 'active'
             ]);
             // Get the address from the request
 

@@ -21,7 +21,9 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'push_notification_token' => $request->push_notification_token,
-            'role' => 'provider'
+            'role' => 'provider',
+            'status' => 'active'
+
         ]);
 
         // Get the address from the request

@@ -38,10 +38,20 @@
                                     <td>{{ $provider->type }}</td>
                                     <td>{{ $provider->state }}</td>
                                     <td>{{ $provider->lga }}</td>
-                                    <td>{{ $provider->verified_by_agent ?? 'null' }}</td>
-                                    <td><span
-                                            class="badge {{ $provider->user->status == 'pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">{{ $provider->user->status }}</span>
+                                    <td>
+                                        @if ($provider->verified_by_agent)
+                                            {{ App\Models\Agent::find($provider->verified_by_agent)->name }}
+                                        @else
+                                            null
+                                        @endif
                                     </td>
+                                    <td>
+                                        <span
+                                            class="badge {{ $provider->status == 'Pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">
+                                            {{ $provider->status }}
+                                        </span>
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>

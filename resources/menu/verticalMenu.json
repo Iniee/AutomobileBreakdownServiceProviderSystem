@@ -86,7 +86,24 @@
       "url": "/service/charges",
       "icon": "menu-icon tf-icons bx bx-money",
       "slug": "trans-service-charges"
+    },
+    {
+      "menuHeader": "Request"
+    },
+    {
+      "name": "Breakdown",
+      "url": "/client/transaction",
+      "icon": "menu-icon tf-icons bx bx-car",
+      "slug": "trans-client-transaction"
+    },
+    {
+      "name": "Service Charges",
+      "url": "/service/charges",
+      "icon": "menu-icon tf-icons bx bx-money",
+      "slug": "trans-service-charges"
     }
+
+    
 
   ]
 }
