@@ -59,7 +59,8 @@ class AgentController extends Controller
           $user = User::create([
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'role' => 'agent'
+            'role' => 'agent',
+            'active' => 'active'
            ]);
 
         // Get the address from the request
