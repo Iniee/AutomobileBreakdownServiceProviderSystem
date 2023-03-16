@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Models\Breakdown;
 use App\Models\Provider;
 use App\Models\Feedback;
+use App\Models\Request as ModelsRequest;
 use Illuminate\Support\Facades\Auth;
 
 class FeedbackController extends Controller
@@ -24,12 +25,13 @@ class FeedbackController extends Controller
         $user = Auth::user();
         $client = Client::where('user_id', $user->id)->first();
         $feedback->client_id = $client->client_id;
-        $breakdown = Breakdown::where('client_id', $client->client_id)->first();
+        $breakdown = Breakdown::find($id);
         $feedback->breakdown_id = $breakdown->breakdown_id;
-        $sp = Provider::find($id);
-        //dd($sp);
-        $feedback->sp_id = $sp->sp_id;
+        $requestdata = ModelsRequest::where('breakdown_id', $breakdown->breakdown_id)->first();
+       
+        $feedback->sp_id = $requestdata->provider_id;
 
+        
         if($feedback->save()){
             return response()->json([
                 'status' => true,

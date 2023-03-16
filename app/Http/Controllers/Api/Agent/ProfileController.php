@@ -75,8 +75,7 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
-                'first_name' => $agent->first_name,
-                'last_name' => $agent->last_name,
+                'last_name' => $agent->name,
                 'email' => $user->email,
                 'home_address' => $agent->home_address,
                 'phone_number' => $agent->phone_number,
@@ -86,19 +85,4 @@ class ProfileController extends Controller
             ]
         ]);
    }
-     public function getProfile () {
-      $user = Auth::user();
-      $agent = Agent::where('user_id', $user->id)->first();
-      //dd($agent);
-      return response()->json([
-        'status' => true,
-        'data' => [
-            'status'=> $user->status,
-            'name' => $agent->first_name . " ". $agent->last_name,
-            'email' => $user->email,
-            'LGA' => $agent->lga,
-            'profile picture' => $agent->profile_picture,
-        ]
-      ]);
-     }
 }

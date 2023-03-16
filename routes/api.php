@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\Agent\ProfileController as AgentProfileController;
 use App\Http\Controllers\Api\Admin\RegisterController as AdminRegisterController;
 use App\Http\Controllers\Api\Client\ProfileController as ClientProfileController;
 use App\Http\Controllers\Api\Provider\RegisterController as ProviderRegisterController;
+use App\Http\Controllers\Api\Provider\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,8 +103,6 @@ Route::middleware(['auth:sanctum', 'auth.agent'])->group(function () {
      //Update Profile
     Route::post('agent/updateProfile', [AgentProfileController::class, 'updateProfile']);
     
-      //NotificationController
-    Route::post('agent/push-notifications', [NotificationController::class, 'agentsendNotification']);
 
 });
 
@@ -121,7 +120,9 @@ Route::middleware(['auth:sanctum', 'auth.provider'])->group(function () {
     
     //NotificationController
     Route::post('provider/push-notifications', [NotificationController::class, 'providersendNotification']);
-
+    
+    //Service
+    Route::get('history/service/rendered', [ServiceController::class, 'historyService']);    
 
 });
 
@@ -148,8 +149,8 @@ Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
     Route::get('provider/details/{id}', [BreakdownController::class, 'detailsProvider']);
     Route::post('store/artisan/request', [RequestController::class, 'storeRequest']);
     
-    //NotificationController
-    Route::post('client/push-notifications/{id}', [NotificationController::class, 'clientsendNotification']);
+    //Requested Provider Details
+    Route::get('provider/info/{id}', [ClientProfileController::class, 'providerdetails']);
 
 
 

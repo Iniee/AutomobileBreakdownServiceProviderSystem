@@ -4,41 +4,28 @@ namespace App\Http\Controllers\Api\Client;
 
 use CURLFile;
 use App\Models\Client;
+use App\Models\Feedback;
+use App\Models\Provider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Client\UpdateProfileRequest;
 
 class ProfileController extends Controller
 {
-     public function getProfile () {
-      $user = Auth::user();
-      $client = Client::where('user_id', $user->id)->first();
-      return response()->json([
-        'status' => true,
-        'data' => [
-            'status'=> $user->status,
-            'name' => $client->first_name . " ". $client->last_name,
-            'email' => $user->email,
-            'wallet_balance' => $client->wallet_balance,
-            'profile picture' => $client->profile_picture,
-            'home address' => $client->home_address
-        ]
-      ]);
-     }
-
     public function updateprofile(UpdateProfileRequest $request)
     {
-        
+
         $user = auth()->user();
         $client = Client::where('user_id', $user->id)->first();
         //dd($client);
         $user->fill($request->validated());
         $client->fill($request->validated());
-        
+
         $user->save();
         $client->save();
-        
+
         // set your Cloudinary credentials
         $cloudinary_url = 'https://api.cloudinary.com/v1_1/{your_cloud_name}/image/upload';
         $cloudinary_upload_preset = 'findyourserviceprovider';
@@ -79,7 +66,7 @@ class ProfileController extends Controller
             } else {
                 // extract the public URL from the response
                 $data = json_decode($response);
-            //dd($data);
+                //dd($data);
                 $public_url = $data->url;
 
                 // update the client's profile picture URL in the database
@@ -90,15 +77,50 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
-                'first_name' => $client->first_name,
-                'last_name' => $client->last_name,
+                'name' => $client->name,
                 'email' => $user->email,
                 'home_address' => $client->home_address,
                 'phone_number' => $client->phone_number,
                 'profile picture' => $client->profile_picture
             ]
         ]);
-   }
+    }
 
-     
+    public function providerdetails($id)
+    {
+        $provider  = Provider::find($id);
+        $feedback = Feedback::where('sp_id', $provider->sp_id)
+            ->select('client_id', 'review')
+            ->join('clients', 'clients.client_id', '=', 'feedbacks.client_id')
+            ->select('clients.name as client_name', 'review')
+            ->get();
+        $rating = Feedback::where('sp_id', $id)->get();
+        $requestdata = DB::table('requests')
+            ->join('breakdowns', 'requests.breakdown_id', '=', 'breakdowns.breakdown_id')
+            ->where('requests.provider_id', $id)
+            ->where('breakdowns.status', 'accepted')
+            ->count();
+            
+        if ($provider->type == 'Artisan') {
+            return response()->json([
+                'profile_picture' => $provider->profile_picture,
+                'name' => $provider->name,
+                'service' => $requestdata,
+                'rating' => floatval($rating->avg('rating')), 
+                'review' => $feedback,
+
+            ]);
+        } else {
+            return response()->json([
+                'profile_picture' => $provider->profile_picture,
+                'name' => $provider->name,
+                'Trips' => $requestdata,
+                'plate_number' => $provider->plate_number,
+                'rating' => floatval($rating->avg('rating')),
+                'review' => $feedback,
+                
+
+            ]);
+        }
+    }
 }

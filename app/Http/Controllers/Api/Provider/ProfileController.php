@@ -11,55 +11,18 @@ use App\Http\Requests\Provider\UpdateProfileRequest;
 
 class ProfileController extends Controller
 {
-    public function getProfile () {
-      $user = Auth::user();
-      $provider = Provider::where('user_id', $user->id)->first();
-      //dd($provider);
-      if ($provider->type =='Artisan') {
-        return response()->json([
-        'status' => true,
-        'data' => [
-            'status'=> $user->status,
-            'name' => $provider->first_name . " ". $provider->last_name,
-            'email' => $user->email,
-            'LGA' => $provider->lga,
-            'type' => $provider->type,
-            'profile picture' => $provider->profile_picture,
-            'business_address' => $provider->business_address,
-            'account_number' => $provider->account_number,
-            'bank' => $provider->bank_name,
-        ]
-      ]);
-      } else {
-         return response()->json([
-        'status' => true,
-        'data' => [
-            'status'=> $user->status,
-            'name' => $provider->first_name . " ". $provider->last_name,
-            'email' => $user->email,
-            'LGA' => $provider->lga,
-            'type' => $provider->type,
-            'plate number' => $provider->plate_number,
-            'profile picture' => $provider->profile_picture,
-            'business_address' => $provider->business_address,
-            'account_number' => $provider->account_number,
-            'bank' => $provider->bank_name,
-        ]
-      ]);
-      }      
-     }
-  public function updateprofile(UpdateProfileRequest $request)
+    public function updateprofile(UpdateProfileRequest $request)
     {
-        
+
         $user = auth()->user();
         $provider = Provider::where('user_id', $user->id)->first();
         //dd($provider);
         $user->fill($request->validated());
         $provider->fill($request->validated());
-        
+
         $user->save();
         $provider->save();
-        
+
         // set your Cloudinary credentials
         $cloudinary_url = 'https://api.cloudinary.com/v1_1/{your_cloud_name}/image/upload';
         $cloudinary_upload_preset = 'findyourserviceprovider';
@@ -100,7 +63,7 @@ class ProfileController extends Controller
             } else {
                 // extract the public URL from the response
                 $data = json_decode($response);
-            //dd($data);
+                //dd($data);
                 $public_url = $data->url;
 
                 // update the provider's profile picture URL in the database
@@ -111,8 +74,7 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
-                'first_name' => $provider->first_name,
-                'last_name' => $provider->last_name,
+                'name' => $provider->name,
                 'email' => $user->email,
                 'phone_number' => $provider->phone_number,
                 'profile picture' => $provider->profile_picture,
@@ -120,5 +82,7 @@ class ProfileController extends Controller
                 'bank' => $provider->bank_name
             ]
         ]);
-   }
+    }
+
+
 }
