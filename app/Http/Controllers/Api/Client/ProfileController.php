@@ -105,20 +105,20 @@ class ProfileController extends Controller
             return response()->json([
                 'profile_picture' => $provider->profile_picture,
                 'name' => $provider->name,
+                'type' => $provider->type,
                 'service' => $requestdata,
                 'rating' => floatval($rating->avg('rating')), 
                 'review' => $feedback,
-
             ]);
         } else {
             return response()->json([
                 'profile_picture' => $provider->profile_picture,
                 'name' => $provider->name,
-                'Trips' => $requestdata,
+                'type' => $provider->type,
+                'trips' => $requestdata,
                 'plate_number' => $provider->plate_number,
                 'rating' => floatval($rating->avg('rating')),
                 'review' => $feedback,
-                
 
             ]);
         }

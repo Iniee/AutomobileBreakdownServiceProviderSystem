@@ -110,6 +110,8 @@ class RequestController extends Controller
                 'name' => $spdata->name,
                 'profile_picture' => $spdata->profile_picture,
                 'type' =>  $spdata->type,
+                'latitude' => $spdata->latitude,
+                'longitude' => $spdata->longitude,
                 'phone_number' =>  $spdata->phone_number,
 
             ]);

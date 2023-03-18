@@ -8,7 +8,6 @@
 <div class="card mb-4">
   <h5 class="card-header">ADMIN PROFILE</h5>
   <!-- Account -->
-  @foreach ($users as $user)
     <div class="card-body">
         <form class="mb-3" action="{{ route('admin.update') }}" method="POST">
             @csrf
@@ -149,7 +148,6 @@
             <!-- /Account -->
         </form>
     </div>
-    @endforeach
   </div>
 
 @endsection

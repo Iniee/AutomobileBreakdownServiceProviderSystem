@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Admin\BreakdownController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\SearchController;
@@ -60,6 +61,11 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/client/transaction', [TransactionController::class, 'clientTransaction'])->name('trans-client-transaction');
   Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
 
+   //Breakdown
+  Route::get('/breakdown/history', [BreakdownController::class, 'breakdownHistory'])->name('request-breakdown');
+  Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
+
+  
   //Logout
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -77,6 +83,7 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/provider/search', [SearchController::class, 'searchSevriceProviderTable'])->name('searchProvider');
 
   Route::get('/transaction/search', [SearchController::class, 'searchTransactionTable'])->name('searchTransaction');
+  Route::get('/breakdown/history/search', [SearchController::class, 'searchBreakdownTable'])->name('searchBreakdown');
 
   //////////////End Search
 

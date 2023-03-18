@@ -28,8 +28,7 @@ class DiagnosisController extends Controller
     }
 
     $id = Breakdown::find($breakdownid);
-    $user_id = Auth::user()->id;
-    $sp = Provider::where('user_id', $user_id)->first();
+    $provider= Auth::user()->providers;
     $cost = $request->input('cost');
 
     // Add extra service charge of 500 to the cost
@@ -48,12 +47,12 @@ class DiagnosisController extends Controller
 
     $form = Diagnosis::create([
         'cost' => $cost,
-        'provider_id' => $sp->sp_id,
+        'provider_id' => $provider->sp_id,
         'client_id' => $client->client_id,
         'breakdown_id' => $id->breakdown_id
     ]);
 
-    return response()->json(['message' => 'Payment successful']);
+    return response()->json(['message' => 'Payment successful', 'data' => $form]);
 }
 
 

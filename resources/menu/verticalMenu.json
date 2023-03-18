@@ -92,9 +92,9 @@
     },
     {
       "name": "Breakdown",
-      "url": "/client/transaction",
+      "url": "/breakdown/history",
       "icon": "menu-icon tf-icons bx bx-car",
-      "slug": "trans-client-transaction"
+      "slug": "request-breakdown"
     },
     {
       "name": "Service Charges",

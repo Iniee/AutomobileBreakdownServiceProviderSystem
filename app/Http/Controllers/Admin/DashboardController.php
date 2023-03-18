@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\FundWallet;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,25 +22,31 @@ class DashboardController extends Controller
   public function showProfileDetails()
   {
     
-    $users = auth()->user()->where('role', 'admin')->join('admins', 'admins.user_id', '=', 'users.id')->get();
-    // dd($users);
-    return view('content.admin-profile.profile', compact('users'));
+    $admin = auth()->user();
+    $user = DB::table('users')
+    ->join('admins', 'users.id', '=', 'admins.user_id')
+    ->where('users.id', $admin->id)
+    ->first();
+    return view('content.admin-profile.profile', compact('user'));
   }
 
 
 
-  public function updateProfileDetails(Request $request)
-  {
+public function updateProfileDetails(Request $request)
+{
     $validatedData = $request->validate([
-      'account_number' => 'required|string|max:10|min:10',
-      'bank_name' => 'required|string',
+        'account_number' => 'required|string|max:10|min:10',
+        'bank_name' => 'required|string',
     ]);
-    $user = auth()->user()->where('role', 'admin')->join('admins', 'admins.user_id', '=', 'users.id')->update([
-      "account_number" => $validatedData['account_number'],
-      "bank_name" => $validatedData['bank_name'],
+
+    $admin = auth()->user()->admin;
+    $admin->update([
+        "account_number" => $validatedData['account_number'],
+        "bank_name" => $validatedData['bank_name'],
     ]);
+
     return redirect('/dashboard');
-  }
+}
 
 
 

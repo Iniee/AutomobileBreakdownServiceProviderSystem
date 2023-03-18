@@ -22,13 +22,13 @@ class Breakdown extends Model
         'status'
     ];
 
-    public function provider()
+   public function clients()
     {
-        return $this->belongsTo(Provider::class);
+        return $this->belongsTo(Client::class, 'breakdown_id', 'client_id');
     }
 
     public function requests()
     {
-        return $this->hasMany(Request::class);
+        return $this->hasMany(Request::class, 'breakdown_id', 'breakdown_id');
     }
 }

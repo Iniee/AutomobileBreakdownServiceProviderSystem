@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Agent;
+use App\Models\Breakdown;
 use App\Models\Client;
 use App\Models\Provider;
 use App\Models\FundWallet;
@@ -120,6 +121,19 @@ class SearchController extends Controller
                                ->get();
 
     return view('content.transaction.client', compact('transactions'));
+
+  }
+
+  public function searchBreakdownTable(Request $request){
+    $search = $request->input('search');
+
+     $breakdowns = Breakdown::where('status', 'accepted')
+                         ->where('breakdown_location', 'LIKE', '%'.$search. '%')
+                         ->orWhere('destination_location', 'LIKE', '%'.$search. '%')
+                        ->latest('updated_at')
+                        ->paginate(12);
+
+    return view('content.breakdown.history', compact('breakdowns'));
 
   }
 }

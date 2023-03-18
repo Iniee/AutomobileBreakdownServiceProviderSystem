@@ -56,10 +56,7 @@ class Provider extends Authenticatable
         return $this->belongsTo(Agent::class);
     }
 
-     public function breakdowns()
-    {
-        return $this->hasMany(Breakdown::class);
-    }
+  
 
     public function requests()
     {

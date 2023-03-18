@@ -8,6 +8,7 @@ use App\Models\Provider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Diagnosis;
 use Illuminate\Support\Facades\Auth;
 
 class RatingController extends Controller
@@ -16,19 +17,24 @@ class RatingController extends Controller
         $user = Auth::user()->providers;
        
         $id = $user->sp_id;
-        $feedback = Feedback::where('sp_id', $id)->get();
 
-        $requestdata = DB::table('requests')
-            ->join('breakdowns', 'requests.breakdown_id', '=', 'breakdowns.breakdown_id')
-            ->where('requests.provider_id', $id)
-            ->where('breakdowns.status', 'accepted')
-            ->count();
+        $earnings = Diagnosis::where('provider_id', $id)->sum('cost');
+        return $earnings;
+        // $feedback = Feedback::where('sp_id', $id)->get();
+
+        // $requestdata = DB::table('requests')
+        //     ->join('breakdowns', 'requests.breakdown_id', '=', 'breakdowns.breakdown_id')
+        //     ->where('requests.provider_id', $id)
+        //     ->where('breakdowns.status', 'accepted')
+        //     ->count();
 
 
-        return response()->json([
-            'avgrating' => floatval($feedback->avg('rating')),
-            'services' => $requestdata,
-            'current_earning' => 34900
-        ]);
+        // return response()->json([
+        //     'avgrating' => floatval($feedback->avg('rating')),
+        //     'services' => $requestdata,
+        //     'current_earning' => 34900
+        // ]);
     }
+    
+    
 }
