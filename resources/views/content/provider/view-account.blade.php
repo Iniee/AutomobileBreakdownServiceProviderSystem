@@ -17,7 +17,6 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Business Address</th>
@@ -25,13 +24,13 @@
                                 <th>State</th>
                                 <th>LGA</th>
                                 <th>Verified By</th>
+                                <th>Earnings</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
                             @foreach ($providers as $provider)
                                 <tr>
-                                    <td>{{ $provider->sp_id }}</td>
                                     <td>{{ $provider->name }}</td>
                                     <td>{{ $provider->phone_number }}</td>
                                     <td>{{ $provider->business_address }}</td>
@@ -45,13 +44,13 @@
                                             null
                                         @endif
                                     </td>
+                                    <td>{{ $provider->total_earnings }}</td>
                                     <td>
                                         <span
                                             class="badge {{ $provider->status == 'Pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">
                                             {{ $provider->status }}
                                         </span>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>

@@ -9,11 +9,17 @@ use App\Http\Controllers\Controller;
 
 class ProviderController extends Controller
 {
-   public function providerAccount()
-   {
-    $providers = Provider::with('user', 'agent')->latest('created_at')->paginate(20);
+  public function providerAccount()
+{
+    $providers = Provider::with('user', 'agent', 'diagnoses')->latest('created_at')->paginate(20);
+
+    foreach ($providers as $provider) {
+        $provider->total_earnings = $provider->diagnoses->sum('cost');
+    }
+
     return view('content.provider.view-account', compact('providers'));
-   }
+}
+
 
    // public function deactiveClient()
    //  {

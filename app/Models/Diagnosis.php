@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Provider;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Diagnosis extends Model
 {
@@ -19,4 +20,9 @@ class Diagnosis extends Model
         'client_id',
         'breakdown_id'
     ];
+
+      public function provider()
+    {
+        return $this->belongsTo(Provider::class, 'provider_id');
+    }
 }
