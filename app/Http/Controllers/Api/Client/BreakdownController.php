@@ -73,14 +73,12 @@ class BreakdownController extends Controller
             $lng = $result['results'][0]['geometry']['location']['lng'];
 
 
-
-
             $breakdown = new Breakdown;
 
             $breakdown->breakdown_location = $location;
             $breakdown->breakdown_latitude = $lat;
             $breakdown->breakdown_longitude = $lng;
-        
+
 
             $user = Auth::user();
             $client = Client::where('user_id', $user->id)->first();
@@ -92,7 +90,7 @@ class BreakdownController extends Controller
                 $max_distance = 2;
 
                 // Query the database for service providers within the maximum radius
-                $providers = Provider::select('sp_id', 'name', 'user_id','latitude', 'longitude', 'business_address')
+                $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address')
                     ->selectRaw("6371 * acos(cos(radians($lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($lng)) + sin(radians($lat)) * sin(radians(latitude))) AS distance")
                     ->where('type', '=', 'artisan')
                     ->having('distance', '<=', $max_distance)
@@ -107,7 +105,8 @@ class BreakdownController extends Controller
                     $provider_id = $provider['user_id'];
                     $user_id = User::where('id', $provider_id)->first();
                     $ftoken = $user_id->push_notification_token;
-
+                    $id = $provider['sp_id'];
+                    $feedback = Feedback::where('sp_id', $id)->get();
 
                     // Build the URL for the request
                     $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
@@ -145,6 +144,7 @@ class BreakdownController extends Controller
                         'distance' => $provider['distance'],
                         'eta' => $eta,
                         'ftoken' => $ftoken,
+                        'rating' => floatval($feedback->avg('rating')),
                         'breakdown_id' => $breakdown->breakdown_id,
                     ];
                 }
@@ -160,6 +160,11 @@ class BreakdownController extends Controller
                     'message' => "Failed"
                 ]);
             }
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Input a valid address'
+            ]);
         }
     }
 
@@ -263,6 +268,8 @@ class BreakdownController extends Controller
                         $provider_id = $provider['user_id'];
                         $user_id = User::where('id', $provider_id)->first();
                         $ftoken = $user_id->push_notification_token;
+                        $id = $provider['sp_id'];
+                        $feedback = Feedback::where('sp_id', $id)->get();
 
                         // Build the URL for the request
                         $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
@@ -300,6 +307,7 @@ class BreakdownController extends Controller
                             'distance' => $provider['distance'],
                             'eta' => $eta,
                             'ftoken' => $ftoken,
+                            'rating' => floatval($feedback->avg('rating')),
                             'breakdown_id' => $breakdown->breakdown_id,
                         ];
                     }
@@ -314,7 +322,7 @@ class BreakdownController extends Controller
         } else {
             return response()->json([
                 'status' => false,
-                'message' => "Failed"
+                'message' => "Input a valid Address"
             ]);
         }
     }
@@ -401,7 +409,8 @@ class BreakdownController extends Controller
                         $provider_id = $provider['user_id'];
                         $user_id = User::where('id', $provider_id)->first();
                         $ftoken = $user_id->push_notification_token;
-
+                        $id = $provider['sp_id'];
+                        $feedback = Feedback::where('sp_id', $id)->get();
                         // Build the URL for the request
                         $url = 'https://maps.googleapis.com/maps/api/distancematrix/json?';
                         $url .= 'units=imperial';
@@ -438,6 +447,7 @@ class BreakdownController extends Controller
                             'distance' => $provider['distance'],
                             'eta' => $eta,
                             'ftoken' => $ftoken,
+                            'rating' => floatval($feedback->avg('rating')),
                             'breakdown_id' => $breakdown->breakdown_id,
                         ];
                     }
@@ -452,7 +462,7 @@ class BreakdownController extends Controller
         } else {
             return response()->json([
                 'status' => false,
-                'message' => "Failed"
+                'message' => "Input a vaild Address"
             ]);
         }
     }

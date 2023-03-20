@@ -112,4 +112,26 @@ class DiagnosisController extends Controller
             'data' => $form
         ]);
     }
+
+    public function hasBeenCharged($breakdown_id)
+{
+    $client = Auth::user()->client;
+
+    $charge = Diagnosis::where('breakdown_id', $breakdown_id)
+        ->where('client_id', $client->client_id)
+        ->first();
+
+    if (!$charge) {
+        return response()->json([
+            'charged' => false
+        ]);
+    }
+
+    return response()->json([
+        'charged' => true,
+        'charge_amount' => $charge->cost,
+        'charge_date' => $charge->created_at
+    ]);
+}
+
 }

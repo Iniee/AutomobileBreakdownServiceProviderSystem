@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Api\Client;
 
+use App\Models\Feedback;
 use App\Models\Provider;
 use App\Models\Breakdown;
+use App\Models\Diagnosis;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Request as ModelsRequest;
 
 class RequestController extends Controller
@@ -105,6 +109,8 @@ class RequestController extends Controller
         $data = $requestdata->provider_id;
 
         $spdata = Provider::find($data);
+        $feedback = Feedback::where('sp_id', $spdata->sp_id)->get();
+
         if ($spdata->type == 'Artisan') {
             return response()->json([
                 'name' => $spdata->name,
@@ -113,6 +119,8 @@ class RequestController extends Controller
                 'latitude' => $spdata->latitude,
                 'longitude' => $spdata->longitude,
                 'phone_number' =>  $spdata->phone_number,
+                'business_address' => $spdata->business_address,
+                'rating' => floatval($feedback->avg('rating')),
 
             ]);
         } else {
@@ -125,7 +133,37 @@ class RequestController extends Controller
                 'latitude' => $spdata->latitude,
                 'longitude' => $spdata->longitude,
                 'business_address' => $spdata->business_address,
+                'rating' => floatval($feedback->avg('rating')),
             ]);
         }
     }
+
+   public function clienthistory()
+{
+    $client = Auth::user()->client;
+    $history = Breakdown::where('client_id', $client->client_id)
+        ->where('status', 'accepted')
+        ->select('breakdown_id', 'breakdown_location', 'created_at')
+        ->get();
+    $history_with_cost = [];
+    $total_cost = 0;
+    foreach ($history as $record) {
+        $diagnosis_cost = Diagnosis::where('breakdown_id', $record->breakdown_id)
+            ->where('client_id', $client->client_id)
+            ->select('cost')
+            ->get();
+        $cost_sum = 0;
+        foreach ($diagnosis_cost as $diagnosis) {
+            $cost_sum += (float) $diagnosis->cost;
+        }
+        $total_cost += $cost_sum;
+        // Add the cost sum to the $record object
+        $record->cost = $cost_sum;
+        $history_with_cost[] = $record;
+    }
+    return response()->json([
+        'data' => $history_with_cost,
+    ]);
+}
+
 }

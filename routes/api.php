@@ -152,6 +152,10 @@ Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
     //Requested Provider Details
     Route::get('provider/info/{id}', [ClientProfileController::class, 'providerdetails']);
 
+    //breakdown history
+    Route::get('client/history', [RequestController::class, 'clienthistory']);
+    //charges
+    Route::get('client/charges/{breakdown_id}', [DiagnosisController::class, 'hasBeenCharged']);
 
 
 });
