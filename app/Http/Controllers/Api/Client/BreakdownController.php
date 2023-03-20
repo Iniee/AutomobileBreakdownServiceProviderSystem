@@ -90,7 +90,7 @@ class BreakdownController extends Controller
                 $max_distance = 2;
 
                 // Query the database for service providers within the maximum radius
-                $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address')
+                $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address', 'profile_picture')
                     ->selectRaw("6371 * acos(cos(radians($lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($lng)) + sin(radians($lat)) * sin(radians(latitude))) AS distance")
                     ->where('type', '=', 'artisan')
                     ->having('distance', '<=', $max_distance)
@@ -142,6 +142,7 @@ class BreakdownController extends Controller
                         'longitude' => $provider['longitude'],
                         'business_address' => $provider['business_address'],
                         'distance' => $provider['distance'],
+                        'profile_picture' => $provider['profile_picture'],
                         'eta' => $eta,
                         'ftoken' => $ftoken,
                         'rating' => floatval($feedback->avg('rating')),
@@ -253,7 +254,7 @@ class BreakdownController extends Controller
                     $max_distance = 10;
 
                     // Query the database for service providers within the maximum radius
-                    $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address')
+                    $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address', 'profile_picture')
                         ->selectRaw("6371 * acos(cos(radians($b_lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($b_lng)) + sin(radians($b_lat)) * sin(radians(latitude))) AS distance")
                         ->where('type', '=', 'Tow Truck')
                         ->having('distance', '<=', $max_distance) // Displays the sp within the max_distance
@@ -305,6 +306,7 @@ class BreakdownController extends Controller
                             'longitude' => $provider['longitude'],
                             'business_address' => $provider['business_address'],
                             'distance' => $provider['distance'],
+                            'profile_picture' => $provider['profile_picture'],
                             'eta' => $eta,
                             'ftoken' => $ftoken,
                             'rating' => floatval($feedback->avg('rating')),
@@ -394,7 +396,7 @@ class BreakdownController extends Controller
                     $max_distance = 10;
 
                     // Query the database for service providers within the maximum radius
-                    $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address')
+                    $providers = Provider::select('sp_id', 'name', 'user_id', 'latitude', 'longitude', 'business_address', 'profile_picture')
                         ->selectRaw("6371 * acos(cos(radians($b_lat)) * cos(radians(latitude)) * cos(radians(longitude) - radians($b_lng)) + sin(radians($b_lat)) * sin(radians(latitude))) AS distance")
                         ->where('type', '=', 'Cab Driver')
                         ->having('distance', '<=', $max_distance) // Displays the sp within the max_distance
@@ -445,6 +447,7 @@ class BreakdownController extends Controller
                             'longitude' => $provider['longitude'],
                             'business_address' => $provider['business_address'],
                             'distance' => $provider['distance'],
+                            'profile_picture' => $provider['profile_picture'],
                             'eta' => $eta,
                             'ftoken' => $ftoken,
                             'rating' => floatval($feedback->avg('rating')),
