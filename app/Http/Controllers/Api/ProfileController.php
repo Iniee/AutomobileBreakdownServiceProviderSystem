@@ -50,7 +50,7 @@ class ProfileController extends Controller
         return response()->json([
         'status' => true,
         'data' => [
-            'status'=> $user->status,
+            'status'=> $provider->status,
             'role' => $user->role,
             'name' => $provider->name,
             'email' => $user->email,

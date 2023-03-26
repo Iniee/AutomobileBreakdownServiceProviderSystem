@@ -68,6 +68,8 @@ Route::get('sp/data/status/{id}', [RequestController::class, 'spdata']);
 Route::get('user/profile', [ApiProfileController::class, 'getProfile'])->middleware('auth:sanctum');
 
 
+
+
 //Authentication Route
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -108,9 +110,6 @@ Route::middleware(['auth:sanctum', 'auth.agent'])->group(function () {
 
 //Provider middleware
 Route::middleware(['auth:sanctum', 'auth.provider'])->group(function () {
-    Route::post('artisan/diagnosis/card/{id}', [DiagnosisController::class, 'store']);
-    Route::post('artisan/payment/{breakdownid}', [DiagnosisController::class, 'storeartisan']);
-    Route::get('driver/payment/{breakdownid}', [DiagnosisController::class, 'storedriver']);
     Route::get('provider/rating', [RatingController::class, 'ProviderAvgRating']);
     
     Route::get('index', [IndexController::class, 'index']);
@@ -122,11 +121,13 @@ Route::middleware(['auth:sanctum', 'auth.provider'])->group(function () {
     Route::post('provider/push-notifications', [NotificationController::class, 'providersendNotification']);
     
     //Service
-    Route::get('history/service/rendered', [ServiceController::class, 'historyService']);    
+    Route::get('history/service/rendered', [ServiceController::class, 'historyService']); 
+    
+    //Service Charge
+   Route::post('provider/cost/{breakdown_id}', [DiagnosisController::class, 'calculateChargeAmount']);
 
 });
 
-//  Route::get('payment/status', [PaymentController::class, 'checkPaymentStatus'])->name('payment.status');
 
 //Client Midddleware
 Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
@@ -154,8 +155,13 @@ Route::middleware(['auth:sanctum', 'auth.client'])->group(function () {
 
     //breakdown history
     Route::get('client/history', [RequestController::class, 'clienthistory']);
+    
     //charges
     Route::get('client/charges/{breakdown_id}', [DiagnosisController::class, 'hasBeenCharged']);
+
+    //Deduct Money
+    Route::get('artisan/payment/{breakdownid}', [DiagnosisController::class, 'storeartisan']);
+    Route::get('driver/payment/{breakdownid}', [DiagnosisController::class, 'storedriver']);
 
 
 });
