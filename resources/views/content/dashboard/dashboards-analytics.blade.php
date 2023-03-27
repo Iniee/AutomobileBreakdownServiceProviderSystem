@@ -23,7 +23,7 @@
           <div class="col-sm-6">
             <div class="card-body">
               <h5 class="card-title text-dark">TOTAL AGENTS</h5>
-              <b>{{ $count = DB::table('agents')->count();  }}</b>
+              <b>{{ $count = DB::table('agents')->count() }}</b>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
           <div class="col-sm-6">
             <div class="card-body">
               <h5 class="card-title text-dark">TOTAL CLIENTS</h5>
-              <b>{{ $count = DB::table('clients')->count();  }}</b>
+              <b>{{ $count = DB::table('clients')->count() }}</b>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
           <div class="col-sm-6">
             <div class="card-body">
               <h5 class="card-title text-dark">TOTAL SERVICEPROVIDERS</h5>
-              <b>{{ $count = DB::table('service_provider')->count(); }} </b>
+              <b>{{ $count = DB::table('service_provider')->count() }} </b>
             </div>
           </div>
         </div>

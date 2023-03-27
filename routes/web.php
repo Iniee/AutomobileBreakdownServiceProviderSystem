@@ -55,7 +55,9 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/deactive/client', [ClientController::class, 'deactiveClient'])->name('client-deactivate-client');
   //Provider Side bar
   Route::get('/view/provider', [ProviderController::class, 'providerAccount'])->name('provider-view-provider');
-  Route::get('/deactivate/provider', [providerController::class, 'providerDeactivateAccount'])->name('provider-deactivate-provider');
+  Route::put('/provider/{provider}/status', [StatusController::class, 'providerStatus'])->name('provider.status');
+  Route::get('/inactive/provider', [ProviderController::class, 'deactiveProviders'])->name('provider-deactive-provider');
+  Route::get('/active/provider', [ProviderController::class, 'activeProviders'])->name('provider-active-provider');
 
   //Transaction
   Route::get('/client/transaction', [TransactionController::class, 'clientTransaction'])->name('trans-client-transaction');
@@ -65,7 +67,7 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/breakdown/history', [BreakdownController::class, 'breakdownHistory'])->name('request-breakdown');
   Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
 
-  
+
   //Logout
   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -81,6 +83,9 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::get('/inactive/clients/search', [SearchController::class, 'searchInactiveClients'])->name('searchInactiveClient');
 
   Route::get('/provider/search', [SearchController::class, 'searchSevriceProviderTable'])->name('searchProvider');
+  Route::get('/inactive/providers/search', [SearchController::class, 'searchInactiveProviders'])->name('searchInactiveProvider');
+  Route::get('/active/providers/search', [SearchController::class, 'searchActiveProviders'])->name('searchActiveProvider');
+
 
   Route::get('/transaction/search', [SearchController::class, 'searchTransactionTable'])->name('searchTransaction');
   Route::get('/breakdown/history/search', [SearchController::class, 'searchBreakdownTable'])->name('searchBreakdown');
