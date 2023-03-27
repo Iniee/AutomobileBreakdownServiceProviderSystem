@@ -21,20 +21,21 @@ class ProviderController extends Controller
 }
 
 
-   // public function deactiveClient()
-   //  {
-   //          $users = User::where([
-   //              ['status', 'pending'],
-   //              ['role', 'provider']
-   //          ])->with('provider')->latest('created_at')->paginate(20);          
-   //          return view('content.provider.deactive-account', compact('users'));
-   //  }
-   //  public function activeClient()
-   //  {
-   //           $users = User::where([
-   //              ['status', 'active'],
-   //              ['role', 'provider']
-   //          ])->with('provider')->latest('created_at')->paginate(20);          
-   //          return view('content.provider.active-account', compact('users'));
-   //  }
+   public function deactiveProviders()
+    {
+            $users = User::where([
+                ['users.status', 'pending'],
+                ['users.role', 'provider']
+            ])->with('providers')->latest('created_at')->paginate(20);
+            return view('content.provider.deactive-account', compact('users'));
+    }
+
+    public function activeProviders()
+    {
+             $users = User::where([
+                ['users.status', 'active'],
+                ['users.role', 'provider']
+            ])->with('providers')->latest('created_at')->paginate(20);
+            return view('content.provider.active-account', compact('users'));
+    }
 }

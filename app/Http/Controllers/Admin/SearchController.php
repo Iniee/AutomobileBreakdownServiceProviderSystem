@@ -110,7 +110,34 @@ class SearchController extends Controller
 
   }
 
+  public function searchActiveProviders(Request $request){
 
+    $query = $request->input('search');
+
+    $users = User::where([
+      ['users.status', 'active'],
+      ['users.role', 'provider']
+    ])
+    ->join('service_provider', 'service_provider.user_id', '=', 'users.id')
+    ->where('service_provider.name', 'LIKE', '%'.$query. '%')
+    ->orWhere('service_provider.lga', 'LIKE', '%'.$query. '%')
+    ->get();
+    return view('content.provider.active-account', compact('users'));
+  }
+  public function searchInactiveProviders(Request $request){
+
+    $query = $request->input('search');
+
+    $users = User::where([
+      ['users.status', 'pending'],
+      ['users.role', 'provider']
+    ])
+    ->join('service_provider', 'service_provider.user_id', '=', 'users.id')
+    ->where('service_provider.name', 'LIKE', '%'.$query. '%')
+    ->orWhere('service_provider.lga', 'LIKE', '%'.$query. '%')
+    ->get();
+    return view('content.provider.deactive-account', compact('users'));
+  }
 
 
   public function searchTransactionTable(Request $request){
@@ -123,6 +150,7 @@ class SearchController extends Controller
     return view('content.transaction.client', compact('transactions'));
 
   }
+
 
   public function searchBreakdownTable(Request $request){
     $search = $request->input('search');

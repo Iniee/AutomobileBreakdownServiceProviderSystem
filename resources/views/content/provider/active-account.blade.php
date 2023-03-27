@@ -1,18 +1,18 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'View All Provider')
-@section('search', '/provider/search')
+@section('title', 'View Active Providers')
+@section('search', '/active/providers/search')
 @section('searchQuery', 'name or LGA')
 
 @section('content')
     <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Provider /</span> View All Providers
+        <span class="text-muted fw-light">Provider /</span> View Active Providers
     </h4>
 
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">Providers on System</h5>
+                <h5 class="card-header">Active Providers on System</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-borderless">
                         <thead>
@@ -24,35 +24,34 @@
                                 <th>State</th>
                                 <th>LGA</th>
                                 <th>Verified By</th>
-                                <th>Earnings</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                {{-- <th>Earnings</th> --}}
+                                {{-- <th>Status</th> --}}
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach ($providers as $provider)
-                              <tr>
-                                    <td>{{ $provider->name }}</td>
-                                    <td>{{ $provider->phone_number }}</td>
-                                    <td>{{ $provider->business_address }}</td>
-                                    <td>{{ $provider->type }}</td>
-                                    <td>{{ $provider->state }}</td>
-                                    <td>{{ $provider->lga }}</td>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->providers->name }}</td>
+                                    <td>{{ $user->providers->phone_number }}</td>
+                                    <td>{{ $user->providers->business_address }}</td>
+                                    <td>{{ $user->providers->type }}</td>
+                                    <td>{{ $user->providers->state }}</td>
+                                    <td>{{ $user->providers->lga }}</td>
                                     <td>
-                                        @if ($provider->verified_by_agent)
-                                            {{ App\Models\Agent::find($provider->verified_by_agent)->name }}
+                                        @if ($user->providers->verified_by_agent)
+                                            {{ App\Models\Agent::find($user->providers->verified_by_agent)->name }}
                                         @else
-                                            Not verified
+                                            null
                                         @endif
                                     </td>
-                                    <td>{{ $provider->total_earnings }}</td>
-                                    <td>
+                                    {{-- <td>{{ $user->providers->total_earnings }}</td> --}}
+                                    {{-- <td>
                                         <span
-                                            class="badge {{ $provider->user->status == 'Pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">
-                                            {{ $provider->user->status }}
+                                            class="badge {{ $user->providers->status == 'Pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">
+                                            {{ $user->providers->status }}
                                         </span>
-                                    </td>
-                                    <td>
+                                    </td> --}}
+                                    {{-- <td>
                                       <div class="dropdown">
                                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                               data-bs-toggle="dropdown"><i
@@ -68,7 +67,7 @@
                                               </form>
                                           </div>
                                       </div>
-                                    </td>
+                                  </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
