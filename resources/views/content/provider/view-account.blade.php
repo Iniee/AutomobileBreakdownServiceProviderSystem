@@ -49,7 +49,7 @@
                                     <td>
                                         <span
                                             class="badge {{ $provider->user->status == 'Pending' ? 'bg-label-danger' : 'bg-label-primary' }} me-1">
-                                            {{ $provider->user->status }}
+                                            {{ $provider->status }}
                                         </span>
                                     </td>
                                     <td>

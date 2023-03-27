@@ -43,7 +43,7 @@ class StatusController extends Controller
   public function providerStatus(Request $request, Provider $provider)
   {
 
-    $user = User::where("id", $provider->user_id)->first();
+    $user = Provider::where("id", $provider->sp_id)->first();
     // Get the selected status from the request
     $status = $request->input('status');
 

@@ -31,17 +31,17 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->providers->name }}</td>
-                                    <td>{{ $user->providers->phone_number }}</td>
-                                    <td>{{ $user->providers->business_address }}</td>
-                                    <td>{{ $user->providers->type }}</td>
-                                    <td>{{ $user->providers->state }}</td>
-                                    <td>{{ $user->providers->lga }}</td>
+                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $user->phone_number }}</td>
+                                    <td>{{ $user->business_address }}</td>
+                                    <td>{{ $user->type }}</td>
+                                    <td>{{ $user->state }}</td>
+                                    <td>{{ $user->lga }}</td>
                                     <td>
-                                        @if ($user->providers->verified_by_agent)
-                                            {{ App\Models\Agent::find($user->providers->verified_by_agent)->name }}
+                                        @if ($user->verified_by_agent)
+                                            {{ App\Models\Agent::find($user->verified_by_agent)->name }}
                                         @else
-                                            null
+                                             Not Verified
                                         @endif
                                     </td>
                                     {{-- <td>{{ $user->providers->total_earnings }}</td> --}}

@@ -23,19 +23,19 @@ class ProviderController extends Controller
 
    public function deactiveProviders()
     {
-            $users = User::where([
-                ['users.status', 'pending'],
-                ['users.role', 'provider']
-            ])->with('providers')->latest('created_at')->paginate(20);
+            $users = Provider::where([
+                ['status', 'pending'],
+            ])->latest('created_at')->paginate(20);
+                        dd($users);
+
             return view('content.provider.deactive-account', compact('users'));
     }
 
     public function activeProviders()
     {
-             $users = User::where([
-                ['users.status', 'active'],
-                ['users.role', 'provider']
-            ])->with('providers')->latest('created_at')->paginate(20);
+             $users = Provider::where([
+                ['status', 'Approved']
+            ])->latest('created_at')->paginate(20);
             return view('content.provider.active-account', compact('users'));
     }
 }

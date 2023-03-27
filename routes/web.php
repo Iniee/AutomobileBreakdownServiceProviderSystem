@@ -53,6 +53,7 @@ Route::group(['middleware'=> ['auth']],function () {
   Route::put('/client/{client}/status', [StatusController::class, 'clientStatus'])->name('client.status');
   Route::get('/active/client', [ClientController::class, 'activeClient'])->name('client-activate-client');
   Route::get('/deactive/client', [ClientController::class, 'deactiveClient'])->name('client-deactivate-client');
+  
   //Provider Side bar
   Route::get('/view/provider', [ProviderController::class, 'providerAccount'])->name('provider-view-provider');
   Route::put('/provider/{provider}/status', [StatusController::class, 'providerStatus'])->name('provider.status');

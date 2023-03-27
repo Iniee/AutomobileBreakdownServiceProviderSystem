@@ -67,8 +67,18 @@
       "submenu": [
         {
           "url": "/view/provider",
-          "name": "View All provider",
+          "name": "View All Provider",
           "slug": "provider-view-provider"
+        },
+         {
+          "url": "/active/provider",
+          "name": "Active Accounts",
+          "slug": "provider-active-provider"
+        },
+        {
+          "url": "/inactive/provider",
+          "name": "Inactive Accounts",
+          "slug": "provider-deactive-provider"
         }
       ]
     },
