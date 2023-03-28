@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Client\UpdateProfileRequest;
 
 class ProfileController extends Controller
@@ -22,7 +23,11 @@ class ProfileController extends Controller
         //dd($client);
         $user->fill($request->validated());
         $client->fill($request->validated());
-
+        
+        $password = $request->input('password');
+        if (!empty($password)) {
+        $user->password = Hash::make($password);
+       }
         $user->save();
         $client->save();
 
@@ -74,12 +79,12 @@ class ProfileController extends Controller
                 $client->save();
             }
         }
+        
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
                 'name' => $client->name,
                 'email' => $user->email,
-                'home_address' => $client->home_address,
                 'phone_number' => $client->phone_number,
                 'profile picture' => $client->profile_picture
             ]

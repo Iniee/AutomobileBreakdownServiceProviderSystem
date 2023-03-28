@@ -7,6 +7,7 @@ use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Provider\UpdateProfileRequest;
 
 class ProfileController extends Controller
@@ -20,6 +21,10 @@ class ProfileController extends Controller
         $user->fill($request->validated());
         $provider->fill($request->validated());
 
+        $password = $request->input('password');
+        if (!empty($password)) {
+        $user->password = Hash::make($password);
+       }
         $user->save();
         $provider->save();
 
@@ -79,7 +84,8 @@ class ProfileController extends Controller
                 'phone_number' => $provider->phone_number,
                 'profile picture' => $provider->profile_picture,
                 'account number' => $provider->account_number,
-                'bank' => $provider->bank_name
+                'bank' => $provider->bank_name,
+                'plate_number' => $provider->plate_number
             ]
         ]);
     }

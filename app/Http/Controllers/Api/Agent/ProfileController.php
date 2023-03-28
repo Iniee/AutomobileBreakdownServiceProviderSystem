@@ -75,9 +75,8 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
-                'last_name' => $agent->name,
+                'name' => $agent->name,
                 'email' => $user->email,
-                'home_address' => $agent->home_address,
                 'phone_number' => $agent->phone_number,
                 'profile picture' => $agent->profile_picture,
                 'account_number' => $agent->account_number,
