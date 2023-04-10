@@ -17,6 +17,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Business Address</th>
@@ -32,6 +33,7 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($providers as $provider)
                               <tr>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $provider->name }}</td>
                                     <td>{{ $provider->phone_number }}</td>
                                     <td>{{ $provider->business_address }}</td>

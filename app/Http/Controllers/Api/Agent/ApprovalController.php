@@ -34,8 +34,8 @@ class ApprovalController extends Controller
             $artisandata = Validator::make(
                 $request->all(),
                 [
-                    'document' => 'required',
-                    'address_confirmation' => 'required|boolean',
+                    'document',
+                    'address_confirmation' => 'boolean',
                 ]
             );
 
@@ -99,7 +99,6 @@ class ApprovalController extends Controller
 
                     // update the client's profile picture URL in the database
                     $approvaldata->document = $public_url;
-                    $approvaldata->save();
                 }
             }
              $provider = User::where('id', $id->user_id)->first();
@@ -141,9 +140,9 @@ class ApprovalController extends Controller
             $driverdata = Validator::make(
                 $request->all(),
                 [
-                    'document' => 'required',
-                    'plate_number' => 'required|boolean',
-                    'address_confirmation' => 'required|boolean',
+                    'document',
+                    'plate_number' => 'boolean',
+                    'address_confirmation' => 'boolean',
                 ]
             );
 

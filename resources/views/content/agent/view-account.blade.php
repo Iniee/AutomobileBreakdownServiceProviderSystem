@@ -30,7 +30,7 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($agents as $agent)
                                 <tr>
-                                    <td>{{ $agent->agent_id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $agent->name }}</td>
                                     <td>{{ $agent->gender }}</td>
                                     <td><span

@@ -86,7 +86,7 @@ class BreakdownController extends Controller
             $breakdown->client_id = $client->client_id;
             //dd($breakdown->client_id);
             if ($breakdown->save()) {
-                //maximum distance
+                //maximum distance in kilometers
                 $max_distance = 2;
 
                 // Query the database for service providers within the maximum radius

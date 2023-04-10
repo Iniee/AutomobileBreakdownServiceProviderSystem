@@ -29,7 +29,7 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($transactions as $transaction)
                                 <tr>
-                                    <td>{{ $transaction->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transaction->client_name }}</td>
                                     <td>{{ $transaction->charged_amount }}</td>
                                     <td>{{ $transaction->transaction_id }}</td>

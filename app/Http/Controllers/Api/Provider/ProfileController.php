@@ -82,10 +82,10 @@ class ProfileController extends Controller
                 'name' => $provider->name,
                 'email' => $user->email,
                 'phone_number' => $provider->phone_number,
-                'profile picture' => $provider->profile_picture,
+                'profile_picture' => $provider->profile_picture,
                 'account number' => $provider->account_number,
                 'bank' => $provider->bank_name,
-                'plate_number' => $provider->plate_number
+                'plate_number' => $provider->plate_number,
             ]
         ]);
     }

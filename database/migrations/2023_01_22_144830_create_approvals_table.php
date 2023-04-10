@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
-            $table->string('document');
+            $table->string('document')->nullable();
             $table->boolean('address_confirmation');
             $table->boolean('plate_number')->nullable();
             $table->enum('status', ['pending', 'approved'])->default('pending');

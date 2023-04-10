@@ -17,6 +17,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Business Address</th>
@@ -31,7 +32,8 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($users as $user)
                                 <tr>
-                                     <td>{{ $user->name }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->name }}</td>
                                     <td>{{ $user->phone_number }}</td>
                                     <td>{{ $user->business_address }}</td>
                                     <td>{{ $user->type }}</td>
@@ -41,7 +43,7 @@
                                         @if ($user->verified_by_agent)
                                             {{ App\Models\Agent::find($user->verified_by_agent)->name }}
                                         @else
-                                             Not Verified
+                                            Not Verified
                                         @endif
                                     </td>
                                     {{-- <td>{{ $user->providers->total_earnings }}</td> --}}

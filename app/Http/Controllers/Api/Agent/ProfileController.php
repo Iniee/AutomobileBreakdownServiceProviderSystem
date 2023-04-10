@@ -72,15 +72,52 @@ class ProfileController extends Controller
                 $agent->save();
             }
         }
+                // Get the address from the request
+        if ($request->has('home_address')) {
+        $address = $request->input('home_address');
+        $url = $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($address)."&key=AIzaSyDornqgr9WTKn7NBam4u0H9-nDrZ2p7vdQ";
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_REFERER, $url);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $data = json_decode($response);
+        $result = $data->results[0]->address_components;
+        //return $result;
+            $lga_result = [];
+            $len = count($result);
+            $lga_result['administrative_area_level_2'] = $result[$len-4];
+            $lga = $lga_result['administrative_area_level_2']->long_name;
+            //return $lga;
+
+            $state_result = [];
+            $len = count($result);
+            $state_result['administrative_area_level_1'] = $result[$len-3];
+            $state = $state_result['administrative_area_level_1']->long_name;
+            //return $state;
+                $data = json_decode($response);
+        $agent->state = $state;
+        $agent->lga = $lga;
+
+        $agent->save();
+    
+    }
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
                 'name' => $agent->name,
                 'email' => $user->email,
                 'phone_number' => $agent->phone_number,
-                'profile picture' => $agent->profile_picture,
+                'profile_picture' => $agent->profile_picture,
                 'account_number' => $agent->account_number,
-                'bank' => $agent->bank_name
+                'bank' => $agent->bank_name,
+                'home_address' => $agent->home_address
             ]
         ]);
    }

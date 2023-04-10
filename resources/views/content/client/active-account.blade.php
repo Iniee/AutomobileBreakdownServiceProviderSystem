@@ -30,7 +30,7 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->client->client_id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->client->name }}</td>
                                     <td>{{ $user->client->gender }}</td>
                                     <td>{{ $user->client->phone_number }}</td>

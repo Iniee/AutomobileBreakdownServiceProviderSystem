@@ -30,6 +30,7 @@ class UpdateProfileRequest extends FormRequest
             'profile_picture' => 'nullable',
             'account_number' => 'nullable|string|max:10|min:10',
             'bank_name' => 'nullable|string',
+            'home_address' => 'nullable|string',
         ];
     }
 }

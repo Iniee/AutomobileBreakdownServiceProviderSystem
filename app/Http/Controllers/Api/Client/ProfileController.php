@@ -23,11 +23,11 @@ class ProfileController extends Controller
         //dd($client);
         $user->fill($request->validated());
         $client->fill($request->validated());
-        
+
         $password = $request->input('password');
         if (!empty($password)) {
-        $user->password = Hash::make($password);
-       }
+            $user->password = Hash::make($password);
+        }
         $user->save();
         $client->save();
 
@@ -79,14 +79,42 @@ class ProfileController extends Controller
                 $client->save();
             }
         }
-        
+
+        // Get the address from the request
+       if ($request->has('home_address')) {
+        $address = $request->input('home_address');
+        $url = $url = "https://maps.googleapis.com/maps/api/geocode/json?address=" . urlencode($address) . "&key=AIzaSyDornqgr9WTKn7NBam4u0H9-nDrZ2p7vdQ";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_REFERER, $url);
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36");
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        $data = json_decode($response);
+        $result = $data->results[0]->address_components;
+
+
+        $state_result = [];
+        $len = count($result);
+        $state_result['administrative_area_level_1'] = $result[$len - 3];
+        $state = $state_result['administrative_area_level_1']->long_name;
+        $client->state = $state;
+        $client->save();
+       }
         return response()->json([
             'message' => 'User profile updated successfully.',
             'data' => [
                 'name' => $client->name,
                 'email' => $user->email,
+                'home_address' => $client->home_address,
+                'state' => $client->state,
                 'phone_number' => $client->phone_number,
-                'profile picture' => $client->profile_picture
+                'profile_picture' => $client->profile_picture
             ]
         ]);
     }
@@ -105,14 +133,14 @@ class ProfileController extends Controller
             ->where('requests.provider_id', $id)
             ->where('breakdowns.status', 'accepted')
             ->count();
-            
+
         if ($provider->type == 'Artisan') {
             return response()->json([
                 'profile_picture' => $provider->profile_picture,
                 'name' => $provider->name,
                 'type' => $provider->type,
                 'service' => $requestdata,
-                'rating' => floatval($rating->avg('rating')), 
+                'rating' => floatval($rating->avg('rating')),
                 'review' => $feedback,
             ]);
         } else {

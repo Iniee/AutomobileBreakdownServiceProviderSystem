@@ -26,8 +26,6 @@ class ProviderController extends Controller
             $users = Provider::where([
                 ['status', 'pending'],
             ])->latest('created_at')->paginate(20);
-                        dd($users);
-
             return view('content.provider.deactive-account', compact('users'));
     }
 

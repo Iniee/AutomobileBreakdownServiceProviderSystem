@@ -30,7 +30,7 @@
                         <tbody class="table-border-bottom-0">
                             @foreach ($breakdowns as $breakdown)
                                 <tr>
-                                    <td>{{ $breakdown->breakdown_id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>
                                         @if ($breakdown->client_id)
                                             {{ App\Models\Client::find($breakdown->client_id)->name }}

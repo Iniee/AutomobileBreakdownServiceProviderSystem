@@ -31,7 +31,7 @@ class UpdateProfileRequest extends FormRequest
             'account_number' => 'nullable|string|max:10|min:10',
             'bank_name' => 'nullable|string',
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'plate_number' => 'nullable|string|max:9'
+            'plate_number' => 'nullable|string|max:9',
         ];
     }
 }
