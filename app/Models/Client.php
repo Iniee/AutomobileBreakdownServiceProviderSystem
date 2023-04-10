@@ -54,4 +54,9 @@ class Client extends  Authenticatable
         return $this->hasMany(Breakdown::class);
     }
 
+    public function diagnoses()
+    {
+        return $this->hasMany(Diagnosis::class, 'client_id');
+    }
+
 }

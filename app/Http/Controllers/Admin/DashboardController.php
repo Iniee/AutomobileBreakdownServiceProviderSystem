@@ -68,7 +68,7 @@ public function updateProfileDetails(Request $request)
     if (Hash::check($request->current_password, $user->password)) {
       $user->password = Hash::make($validatedPasswd['password']);
       $user->save();
-
+      $request->session()->flash('message', 'Password Changed  successfully');
       return redirect('/dashboard');
     }
 

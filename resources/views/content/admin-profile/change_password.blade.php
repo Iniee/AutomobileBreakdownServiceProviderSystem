@@ -1,6 +1,6 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Your Profile')
+@section('title', 'Profile')
 
 @section('content')
 

@@ -38,7 +38,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
       <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        @if(request()->routeIs('dashboard', 'agent.create', 'trans-service-charges', 'admin.profile', 'admin.changePasswordPage'))
+        @if(request()->routeIs('dashboard', 'agent.create', 'admin.profile', 'admin.changePasswordPage'))
         @else
           <div class="navbar-nav align-items-center">
             {{-- <div > --}}

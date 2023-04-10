@@ -25,4 +25,8 @@ class Diagnosis extends Model
     {
         return $this->belongsTo(Provider::class, 'provider_id');
     }
+      public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
 }

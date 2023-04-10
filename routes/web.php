@@ -66,6 +66,7 @@ Route::group(['middleware'=> ['auth']],function () {
 
    //Breakdown
   Route::get('/breakdown/history', [BreakdownController::class, 'breakdownHistory'])->name('request-breakdown');
+  Route::get('/breakdown/chart', [BreakdownController::class, 'chart'])->name('request-breakdown');
   Route::get('/service/charges', [TransactionController::class, 'serviceCharges'])->name('trans-service-charges');
 
 
@@ -89,6 +90,7 @@ Route::group(['middleware'=> ['auth']],function () {
 
 
   Route::get('/transaction/search', [SearchController::class, 'searchTransactionTable'])->name('searchTransaction');
+  Route::get('/service/search', [SearchController::class, 'searchServiceChargeTable'])->name('searchService');
   Route::get('/breakdown/history/search', [SearchController::class, 'searchBreakdownTable'])->name('searchBreakdown');
 
   //////////////End Search
