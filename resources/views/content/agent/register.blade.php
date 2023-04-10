@@ -10,7 +10,9 @@
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Agent /</span> Register Agent
     </h4>
-
+    @if (session()->has('message'))
+      <div class="alert alert-primary">{{ session()->get('message') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             {{-- <ul class="nav nav-pills flex-column flex-md-row mb-3">
