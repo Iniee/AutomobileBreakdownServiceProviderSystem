@@ -8,7 +8,9 @@
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Provider /</span> View All Providers
     </h4>
-
+    @if (session()->has('message'))
+      <div class="alert alert-primary">{{ session()->get('message') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -64,9 +66,9 @@
                                                   @csrf
                                                   @method('PUT')
                                                   <button class="dropdown-item" type="submit" name="status"
-                                                      value="active"><i class="bx bx bx-lock-open"></i> Activate</button>
+                                                      value="Approved"><i class="bx bx bx-lock-open"></i> Activate</button>
                                                   <button class="dropdown-item" type="submit" name="status"
-                                                      value="pending"><i class="bx bx bx-lock"></i> Deactivate</button>
+                                                      value="Pending"><i class="bx bx bx-lock"></i> Deactivate</button>
                                               </form>
                                           </div>
                                       </div>

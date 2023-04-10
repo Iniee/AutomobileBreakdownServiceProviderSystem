@@ -21,9 +21,9 @@ class StatusController extends Controller
     // Update the user's status
     $user->status = $status;
     $user->save();
-
+    $request->session()->flash('message', 'Agent\'s status updated successfully: '.ucfirst($user->status));
     // Redirect back to the user list with a success message
-    return redirect()->route('agent-view-agent')->with('success', 'User status updated successfully.');
+    return redirect()->back();
   }
 
   public function clientStatus(Request $request, Client $client)
@@ -36,22 +36,25 @@ class StatusController extends Controller
     // Update the user's status
     $user->status = $status;
     $user->save();
-
+    $request->session()->flash('message', 'Client\'s status updated successfully: '.ucfirst($user->status));
     // Redirect back to the user list with a success message
-    return redirect()->route('client-view-client')->with('success', 'User status updated successfully.');
+    return redirect()->back();
   }
   public function providerStatus(Request $request, Provider $provider)
   {
 
-    $user = Provider::where("id", $provider->sp_id)->first();
+    $user = Provider::where("sp_id", $provider->sp_id)->first();
+
     // Get the selected status from the request
     $status = $request->input('status');
 
     // Update the user's status
     $user->status = $status;
     $user->save();
-
+    $request->session()->flash('message', 'Service Provider\'s status updated successfully: '.ucfirst($user->status));
     // Redirect back to the user list with a success message
-    return redirect()->route('provider-view-provider')->with('success', 'User status updated successfully.');
+    // return redirect()->route('provider-view-provider');
+    return redirect()->back();
   }
 }
+

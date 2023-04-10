@@ -9,7 +9,9 @@
     <h4 class="fw-bold py-3 mb-4">
         <span class="text-muted fw-light">Client /</span> View All Clients
     </h4>
-
+    @if (session()->has('message'))
+      <div class="alert alert-primary">{{ session()->get('message') }}</div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <div class="card">

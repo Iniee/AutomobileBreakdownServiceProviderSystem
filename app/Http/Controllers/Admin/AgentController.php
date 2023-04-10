@@ -24,7 +24,7 @@ class AgentController extends Controller
             $users = User::where([
                 ['status', 'pending'],
                 ['role', 'agent']
-            ])->with('agent')->latest('created_at')->paginate(20);          
+            ])->with('agent')->latest('created_at')->paginate(20);
             return view('content.agent.deactive-account', compact('users'));
     }
     public function activeAgent()
@@ -32,10 +32,10 @@ class AgentController extends Controller
              $users = User::where([
                 ['status', 'active'],
                 ['role', 'agent']
-            ])->with('agent')->latest('created_at')->paginate(20);          
+            ])->with('agent')->latest('created_at')->paginate(20);
             return view('content.agent.active-account', compact('users'));
     }
-   
+
     public function register()
     {
     return view('content.agent.register');
@@ -66,7 +66,7 @@ class AgentController extends Controller
         // Get the address from the request
         $address = $request->input('home_address');
         $url = $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($address)."&key=AIzaSyDornqgr9WTKn7NBam4u0H9-nDrZ2p7vdQ";
-        
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -89,7 +89,7 @@ class AgentController extends Controller
             $state_result['administrative_area_level_1'] = $result[$len-3];
             $state = $state_result['administrative_area_level_1']->long_name;
             //return $state;
-       
+
         $agent = Agent::create([
             'user_id' => $user->id,
             'name' => $validatedData['name'],
@@ -108,7 +108,7 @@ class AgentController extends Controller
         $cloudinary_upload_preset = 'findyourserviceprovider';
         $cloudinary_api_key = '719546256243947';
         $cloudinary_api_secret = 'WeYbpCpVcYHKzciwSGPwz-SXeMI';
-   
+
         // Handle profile picture upload
         if ($request->hasFile('profile_picture')) {
             dd("Yes");
@@ -130,7 +130,7 @@ class AgentController extends Controller
                     'timestamp' => time(),
                 )
             ));
-        
+
             // execute the curl request
             $response = curl_exec($curl);
             dd($response);
@@ -152,10 +152,12 @@ class AgentController extends Controller
                 $agent->save();
              }
         }
-            return redirect()->route('dashboard');   
+        $request->session()->flash('message', 'Agent registered successfully.');
+        // return redirect()->route('dashboard');
+        return redirect()->back();
     }
-   
-        
+
+
             public function agentDeactivateAccount()
             {
                 return view('content.agent.deactivate-account');
